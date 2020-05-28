@@ -2,6 +2,8 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.Category;
 import com.lxlt.bean.CategoryExample;
+import com.lxlt.bean.CategoryL1Data;
+import com.lxlt.bean.CategoryListData;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +30,8 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<CategoryListData> selectByLevel(@Param("level") String level);
+
+    List<CategoryL1Data> selectL1(@Param("level") String level);
 }

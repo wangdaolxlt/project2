@@ -204,6 +204,53 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+  <resultMap id="CategoryListDate" type="com.lxlt.bean.CategoryListData">
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="keywords" property="keywords"/>
+    <result column="desc" property="desc"/>
+    <result column="icon_url" property="iconUrl"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="level" property="level"/>
+    <collection property="children" ofType="com.lxlt.bean.CategoryListData">
+      <result column="bid" property="id"/>
+      <result column="bname" property="name"/>
+      <result column="bkeywords" property="keywords"/>
+      <result column="bdesc" property="desc"/>
+      <result column="bicon_url" property="iconUrl"/>
+      <result column="bpic_url" property="picUrl"/>
+      <result column="blevel" property="level"/>
+    </collection>
+  </resultMap>
+  <select id="selectByLevel" resultMap="CategoryListDate">
+      SELECT
+          a.id,
+          a.name,
+          a.keywords,
+          a.desc,
+          a.icon_url,
+          a.pic_url,
+          a.level,
+          b.id as bid,
+          b.name as bname,
+          b.keywords as bkeywords,
+          b.desc as bdesc,
+          b.icon_url as bicon_url,
+          b.pic_url as bpic_url,
+          b.level as blevel
+      FROM
+          cskaoyanmall_category AS a
+          JOIN cskaoyanmall_category AS b ON a.id = b.pid
+      WHERE
+          a.level = #{level}
+  </select>
+
+
+  <select id="selectL1" resultType="com.lxlt.bean.CategoryL1Data">
+      select id as value, name as label from cskaoyanmall_category where level = #{level}
+  </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_category
     <set>
