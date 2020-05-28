@@ -4,16 +4,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @PackgeName: com.lxlt.controller
- * @ClassName: DashboardController
- * @Author: admin
- * Date: 2020/5/28 20:58
- * project name: project2
- * @Version:
- * @Description:
+ * @Author: Lucas_Alison
+ * Date: 2020/5/28 17:31
  */
 @RestController
-@RequestMapping("admin/dashboard")
+@RequestMapping("admin")
 public class DashboardController {
 
+    @RequestMapping("dashboard")
+    public String dashboard(){
+        return "{\n" +
+                "\t\"errno\": 0,\n" +
+                "\t\"data\": {\n" +
+                "\t\t\"goodsTotal\": 248,\n" +
+                "\t\t\"userTotal\": 3,\n" +
+                "\t\t\"productTotal\": 255,\n" +
+                "\t\t\"orderTotal\": 73\n" +
+                "\t},\n" +
+                "\t\"errmsg\": \"成功\"\n" +
+                "}";
+    }
 }

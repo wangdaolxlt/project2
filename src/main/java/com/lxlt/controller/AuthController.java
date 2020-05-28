@@ -1,40 +1,33 @@
 package com.lxlt.controller;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.bean.LoginBean;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
- * @PackgeName: com.lxlt.controller
- * @ClassName: AuthController
- * @Author: admin
- * Date: 2020/5/28 19:30
- * project name: project2
- * @Version:
- * @Description:
+ * @Author: Lucas_Alison
+ * Date: 2020/5/28 16:13
  */
+
 @RestController
 @RequestMapping("admin/auth")
 public class AuthController {
 
-    //@RequestMapping("admin/auth/login")
-    //public Object login(@RequestBody Map){
-    //
-    //}
     @RequestMapping("login")
-    public BaseRespVo login(@RequestBody LoginBean loginBean){
-        BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();
-        objectBaseRespVo.setData("859062cc-d49d-4730-b561-c2ff944023de");
-        objectBaseRespVo.setErrno(0);
-        objectBaseRespVo.setErrmsg("成功");
-        return objectBaseRespVo;
+    public BaseRespVo login(@RequestBody Map loginMap) {
+        BaseRespVo baseRespVo = new BaseRespVo();
+        baseRespVo.setErrno(0);
+        baseRespVo.setData("6cfc3d7c-bf85-4886-811f-0e3ea550c72a");
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
     }
 
     @RequestMapping("info")
-    public String info(){
-
+    public String info() {
         return "{\"errno\":0,\"data\":{\"roles\":[\"超级管理员\"],\"name\":\"admin123\",\"perms\":[\"*\"],\"avatar\":\"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif\"},\"errmsg\":\"成功\"}";
+
     }
 }

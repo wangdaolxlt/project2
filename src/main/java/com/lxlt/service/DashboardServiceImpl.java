@@ -29,13 +29,13 @@ public class DashboardServiceImpl implements DashboradService {
     GoodsMapper goodsMapper;
     GoodsProductMapper goodsProductMapper;
 
-    @Override
-    public Integer queryCountsByName(String name) {
-        if ("user".equals(name)) {
-                        
-        } else if ("order".equals(name)) {
-            orderMapper
-        }
-
-    }
+    // @Override
+    // public Integer queryCountsByName(String name) {
+    //     if ("user".equals(name)) {
+    //
+    //     } else if ("order".equals(name)) {
+    //         orderMapper
+    //     }
+    //
+    // }
 }

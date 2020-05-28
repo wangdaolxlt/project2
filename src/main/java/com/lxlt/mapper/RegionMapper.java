@@ -28,4 +28,6 @@ public interface RegionMapper {
     int updateByPrimaryKeySelective(Region record);
 
     int updateByPrimaryKey(Region record);
+
+    List<Region> queryAllRegionAndCategorize();
 }

@@ -10,5 +10,5 @@ package com.lxlt.service;
  * @Description:
  */
 public interface DashboradService {
-    Integer queryCountsByName(String name);
+    // Integer queryCountsByName(String name);
 }
