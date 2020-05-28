@@ -9,14 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @PackgeName: com.lxlt.controller
  * @ClassName: AuthController
- * @Author: Li Haiquan
- * Date: 2020/5/28 16:20
+ * @Author: admin
+ * Date: 2020/5/28 19:30
  * project name: project2
+ * @Version:
+ * @Description:
  */
-
 @RestController
 @RequestMapping("admin/auth")
 public class AuthController {
+
+    //@RequestMapping("admin/auth/login")
+    //public Object login(@RequestBody Map){
+    //
+    //}
     @RequestMapping("login")
     public BaseRespVo login(@RequestBody LoginBean loginBean){
         BaseRespVo<Object> objectBaseRespVo = new BaseRespVo<>();

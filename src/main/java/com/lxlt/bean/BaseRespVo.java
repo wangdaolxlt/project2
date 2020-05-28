@@ -5,17 +5,20 @@ import lombok.Data;
 /**
  * @PackgeName: com.lxlt.bean
  * @ClassName: BaseRespVo
- * @Author: Li Haiquan
- * Date: 2020/5/28 16:53
+ * @Author: admin
+ * Date: 2020/5/28 19:50
  * project name: project2
+ * @Version:
+ * @Description:
  */
 
 @Data
 public class BaseRespVo<T> {
 
+
     /**
      * errno : 0
-     * data : 2700ebd4-73aa-4066-8a92-819ba14b57a9
+     * data : 8436ac0f-6de8-4697-a536-e9d8f1be1f9b
      * errmsg : 成功
      */
 

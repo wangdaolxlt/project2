@@ -2,13 +2,6 @@ package com.lxlt.bean;
 
 import java.util.List;
 
-/**
- * @PackgeName: com.lxlt.bean
- * @ClassName: InfoRespVo
- * @Author: Li Haiquan
- * Date: 2020/5/28 16:58
- * project name: project2
- */
 public class InfoRespVo {
 
     /**
