@@ -34,4 +34,6 @@ public interface CategoryMapper {
     List<CategoryListData> selectByLevel(@Param("level") String level);
 
     List<CategoryL1Data> selectL1(@Param("level") String level);
+
+    Integer getLastInsertId();
 }

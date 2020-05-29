@@ -104,7 +104,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.lxlt.bean.Storage">
-    insert into cskaoyanmall_storage (id, key, name,
+    insert into cskaoyanmall_storage (id, `key`, name,
       type, size, url, add_time,
       update_time, deleted)
     values (#{id,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
         id,
       </if>
       <if test="key != null">
-        key,
+        `key`,
       </if>
       <if test="name != null">
         name,
@@ -178,7 +178,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+
+  <select id="getLastInsertId" resultType="java.lang.Integer">
+      select  LAST_INSERT_ID();
+  </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_storage
     <set>
       <if test="record.id != null">
