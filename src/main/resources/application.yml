@@ -8,7 +8,7 @@ spring:
     username: root
     password: 123456
   resources:
-    static-locations: file:D:/WangDao/Project2/project2/src/main/resources/static/pic/
+    static-locations: file:D:/uploadFileDirectory/
   mvc:
     static-path-pattern: /wx/storage/fetch/**
 
@@ -18,7 +18,7 @@ mybatis:
 map:
   domain: 'http://localhost:'
   port: ${server.port}
-  uploadFileDirectory: /src/main/resources/static/pic/
+  uploadFileDirectory: 'D:/uploadFileDirectory/'
   staticPath: /wx/storage/fetch/
 
 logging:

@@ -5,8 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
 import com.lxlt.bean.Storage;
 import com.lxlt.bean.StorageExample;
-import com.lxlt.bean.Topic;
-import com.lxlt.bean.TopicExample;
 import com.lxlt.bean.storagebean.StorageQueryBean;
 import com.lxlt.mapper.StorageMapper;
 import lombok.Data;
@@ -49,10 +47,8 @@ public class StorageServiceImpl implements StorageService{
         String suffix = originalFilename.substring(index);
         //拼接生成新的文件名
         key = key + suffix;
-        String path = System.getProperty("user.dir");
-        path = path + uploadFileDirectory;
         //上传文件
-        File newFile = new File(path, key);
+        File newFile = new File(uploadFileDirectory, key);
         try {
             file.transferTo(newFile);
         } catch (IOException e) {
