@@ -1,5 +1,7 @@
 package com.lxlt.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Ad {
@@ -21,8 +23,10 @@ public class Ad {
 
     private Boolean enabled;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;

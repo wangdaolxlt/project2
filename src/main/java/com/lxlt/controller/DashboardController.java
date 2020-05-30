@@ -1,7 +1,14 @@
 package com.lxlt.controller;
 
+import com.lxlt.bean.BaseRespVo;
+import com.lxlt.service.DashboardServiceImpl;
+import com.lxlt.service.DashboradService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: Lucas_Alison
@@ -11,17 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("admin")
 public class DashboardController {
 
+    @Autowired
+    DashboradService dashboradService;
+
     @RequestMapping("dashboard")
-    public String dashboard(){
-        return "{\n" +
-                "\t\"errno\": 0,\n" +
-                "\t\"data\": {\n" +
-                "\t\t\"goodsTotal\": 248,\n" +
-                "\t\t\"userTotal\": 3,\n" +
-                "\t\t\"productTotal\": 255,\n" +
-                "\t\t\"orderTotal\": 73\n" +
-                "\t},\n" +
-                "\t\"errmsg\": \"成功\"\n" +
-                "}";
+    public BaseRespVo dashboard() {
+        BaseRespVo<HashMap> baseRespVo = new BaseRespVo<>();
+        HashMap<String, Integer> hashMap = dashboradService.queryAllCounts();
+        baseRespVo.setData(hashMap);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
     }
+
+
 }

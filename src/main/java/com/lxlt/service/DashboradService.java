@@ -1,5 +1,9 @@
 package com.lxlt.service;
 
+import com.lxlt.bean.BaseRespVo;
+
+import java.util.HashMap;
+
 /**
  * @PackgeName: com.lxlt.service
  * @ClassName: DashboradService
@@ -10,5 +14,5 @@ package com.lxlt.service;
  * @Description:
  */
 public interface DashboradService {
-    // Integer queryCountsByName(String name);
+    HashMap<String, Integer> queryAllCounts();
 }
