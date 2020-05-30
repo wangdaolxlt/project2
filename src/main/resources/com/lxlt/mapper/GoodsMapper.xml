@@ -156,7 +156,7 @@
       #{retailPrice,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT}, #{detail,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Goods">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.Goods" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyanmall_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

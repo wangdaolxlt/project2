@@ -1,4 +1,4 @@
-package com.lxlt.service;
+package com.lxlt.service.regionservice;
 
 import com.lxlt.bean.Region;
 import org.springframework.stereotype.Service;

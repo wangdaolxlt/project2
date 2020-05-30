@@ -2,6 +2,8 @@ package com.lxlt.bean;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @PackgeName: com.lxlt.bean
  * @ClassName: CategoryL1Data
@@ -13,4 +15,5 @@ import lombok.Data;
 public class CategoryL1Data {
     private String value;
     private String label;
+    private List<CategoryL1Data> children;
 }

@@ -626,7 +626,7 @@ public class BrandExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeletedEqualTo(Boolean value) {
+        public Criteria andDeletedEqualTo(int value) {
             addCriterion("deleted =", value, "deleted");
             return (Criteria) this;
         }

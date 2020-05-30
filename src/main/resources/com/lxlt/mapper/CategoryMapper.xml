@@ -109,7 +109,7 @@
   </delete>
   <insert id="insert" parameterType="com.lxlt.bean.Category">
     insert into cskaoyanmall_category (id, name, keywords,
-      desc, pid, icon_url,
+      `desc`, pid, icon_url,
       pic_url, level, sort_order,
       add_time, update_time, deleted
       )
@@ -132,7 +132,7 @@
         keywords,
       </if>
       <if test="desc != null">
-        desc,
+        `desc`,
       </if>
       <if test="pid != null">
         pid,
@@ -213,7 +213,7 @@
     <result column="icon_url" property="iconUrl"/>
     <result column="pic_url" property="picUrl"/>
     <result column="level" property="level"/>
-    <collection property="children" ofType="com.lxlt.bean.CategoryListData">
+<!--    <collection property="children" ofType="com.lxlt.bean.CategoryListData">
       <result column="bid" property="id"/>
       <result column="bname" property="name"/>
       <result column="bkeywords" property="keywords"/>
@@ -221,37 +221,48 @@
       <result column="bicon_url" property="iconUrl"/>
       <result column="bpic_url" property="picUrl"/>
       <result column="blevel" property="level"/>
-    </collection>
+    </collection>-->
+    <collection property="children" column="id"
+                select="com.lxlt.mapper.CategoryMapper.selectChildren"/>
   </resultMap>
   <select id="selectByLevel" resultMap="CategoryListDate">
       SELECT
-          a.id,
-          a.name,
-          a.keywords,
-          a.desc,
-          a.icon_url,
-          a.pic_url,
-          a.level,
-          b.id as bid,
-          b.name as bname,
-          b.keywords as bkeywords,
-          b.desc as bdesc,
-          b.icon_url as bicon_url,
-          b.pic_url as bpic_url,
-          b.level as blevel
+          id,name,keywords,`desc`,icon_url,pic_url,level
       FROM
-          cskaoyanmall_category AS a
-          JOIN cskaoyanmall_category AS b ON a.id = b.pid
-      WHERE
-          a.level = #{level}
+          cskaoyanmall_category
+      where level = #{level} and deleted = 0
   </select>
+
+  <resultMap id="childrenMap" type="com.lxlt.bean.CategoryListData">
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="keywords" property="keywords"/>
+    <result column="desc" property="desc"/>
+    <result column="icon_url" property="iconUrl"/>
+    <result column="pic_url" property="picUrl"/>
+    <result column="level" property="level"/>
+  </resultMap>
+  <select id="selectChildren" resultMap="childrenMap">
+      SELECT
+      id,name,keywords,`desc`,icon_url,pic_url,level
+      FROM
+      cskaoyanmall_category
+      where pid = #{id} and deleted = 0
+  </select>
+    <select id="selectPidByid" resultType="java.lang.Integer">
+      select pid from cskaoyanmall_category where id = #{catCid}
+    </select>
 
 
   <select id="selectL1" resultType="com.lxlt.bean.CategoryL1Data">
-      select id as value, name as label from cskaoyanmall_category where level = #{level}
+      select id as value, name as label from cskaoyanmall_category where level = #{level} and cskaoyanmall_category.`deleted` = 0
   </select>
 
-  <update id="updateByExampleSelective" parameterType="map">
+  <select id="getLastInsertId" resultType="java.lang.Integer">
+    select  LAST_INSERT_ID();
+  </select>
+
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_category
     <set>
       <if test="record.id != null">
@@ -264,7 +275,7 @@
         keywords = #{record.keywords,jdbcType=VARCHAR},
       </if>
       <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=VARCHAR},
+        `desc` = #{record.desc,jdbcType=VARCHAR},
       </if>
       <if test="record.pid != null">
         pid = #{record.pid,jdbcType=INTEGER},
@@ -300,7 +311,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=VARCHAR},
+      `desc` = #{record.desc,jdbcType=VARCHAR},
       pid = #{record.pid,jdbcType=INTEGER},
       icon_url = #{record.iconUrl,jdbcType=VARCHAR},
       pic_url = #{record.picUrl,jdbcType=VARCHAR},
@@ -323,7 +334,7 @@
         keywords = #{keywords,jdbcType=VARCHAR},
       </if>
       <if test="desc != null">
-        desc = #{desc,jdbcType=VARCHAR},
+        `desc` = #{desc,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
         pid = #{pid,jdbcType=INTEGER},
@@ -356,7 +367,7 @@
     update cskaoyanmall_category
     set name = #{name,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},

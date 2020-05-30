@@ -5,6 +5,7 @@ import com.lxlt.bean.CategoryExample;
 import com.lxlt.bean.CategoryL1Data;
 import com.lxlt.bean.CategoryListData;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -34,4 +35,11 @@ public interface CategoryMapper {
     List<CategoryListData> selectByLevel(@Param("level") String level);
 
     List<CategoryL1Data> selectL1(@Param("level") String level);
+
+    Integer selectPidByid(@Param("catCid") Integer catCid);
+
+    @Select("select id as value, `name` as label from cskaoyanmall_category where pid=#{pid}")
+    List<CategoryL1Data> selectCategoryByPid(@Param("pid") String levelOneId);
+
+    Integer getLastInsertId();
 }

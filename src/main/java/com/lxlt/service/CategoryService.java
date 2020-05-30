@@ -1,6 +1,8 @@
 package com.lxlt.service;
 
 import com.lxlt.bean.BaseRespVo;
+import com.lxlt.bean.Category;
+import com.lxlt.bean.CategoryListData;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -13,7 +15,13 @@ import org.apache.ibatis.annotations.Param;
  * project name: project2
  */
 public interface CategoryService {
-    BaseRespVo selectByLevel(@Param("level") String level);
+    BaseRespVo selectByLevel(String level);
 
-    BaseRespVo selectL1(@Param("level") String level);
+    BaseRespVo selectL1(String level);
+
+    void delete(CategoryListData categoryListData);
+
+    Category create(Category requestCategory);
+
+    void update(Category requestCategory);
 }

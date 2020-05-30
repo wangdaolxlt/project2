@@ -1,14 +1,12 @@
 package com.lxlt.service;
 
 import com.lxlt.bean.Region;
+import com.lxlt.service.regionservice.RegionServiceImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @Author: Lucas_Alison
