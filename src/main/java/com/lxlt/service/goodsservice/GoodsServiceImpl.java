@@ -223,7 +223,6 @@ public class GoodsServiceImpl implements GoodsService {
      * @param goodsDetailBean
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public int update(GoodsDetailBean goodsDetailBean) {
         Goods goods = goodsDetailBean.getGoods();

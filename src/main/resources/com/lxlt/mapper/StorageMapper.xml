@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, key, name, type, size, url, add_time, update_time, deleted
+    id, `key`, name, type, size, url, add_time, update_time, deleted
   </sql>
   <select id="selectByExample" parameterType="com.lxlt.bean.StorageExample" resultMap="BaseResultMap">
     select
@@ -111,7 +111,7 @@
       #{type,jdbcType=VARCHAR}, #{size,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Storage">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.lxlt.bean.Storage">
     insert into cskaoyanmall_storage
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -179,9 +179,6 @@
     </if>
   </select>
 
-  <select id="getLastInsertId" resultType="java.lang.Integer">
-      select  LAST_INSERT_ID();
-  </select>
     <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_storage
     <set>
@@ -189,7 +186,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.key != null">
-        key = #{record.key,jdbcType=VARCHAR},
+        `key` = #{record.key,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
@@ -220,7 +217,7 @@
   <update id="updateByExample" parameterType="map">
     update cskaoyanmall_storage
     set id = #{record.id,jdbcType=INTEGER},
-      key = #{record.key,jdbcType=VARCHAR},
+      `key` = #{record.key,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
       size = #{record.size,jdbcType=INTEGER},
@@ -236,7 +233,7 @@
     update cskaoyanmall_storage
     <set>
       <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+        `key` = #{key,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -264,7 +261,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.Storage">
     update cskaoyanmall_storage
-    set key = #{key,jdbcType=VARCHAR},
+    set `key` = #{key,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       size = #{size,jdbcType=INTEGER},

@@ -1,4 +1,4 @@
-package com.lxlt.service;
+package com.lxlt.service.categoryservice;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Category;
