@@ -104,7 +104,6 @@ public class GoodsController {
 
     @RequestMapping("detail")
     public BaseRespVo detail(Integer id){
-
         BaseRespVo baseRespVo = new BaseRespVo();
         GoodsDetailBean goodsDetailBean = goodsService.goodsDetail(id);
         if (goodsDetailBean == null) {

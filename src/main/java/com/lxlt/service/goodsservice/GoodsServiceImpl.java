@@ -67,29 +67,42 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public GoodsDetailBean goodsDetail(Integer goodsId) {
-        // TODO: 2020/5/30 逻辑删除 
         GoodsDetailBean goodsDetailBean = new GoodsDetailBean();
-        Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+
         // goods
+        GoodsExample goodsExample = new GoodsExample();
+        goodsExample.createCriteria().andIdEqualTo(goodsId).andDeletedEqualTo(false);
+        List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
+        Goods goods = null;
+        try {
+            goods = goodsList.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         goodsDetailBean.setGoods(goods);
+
+
         // 所属分类 categoryIds, 一级分类和二级分类
         Integer catCid = goods.getCategoryId();
         Integer catPid = categoryMapper.selectPidByid(catCid);
         goodsDetailBean.setCategoryIds(new Integer[]{catPid, catCid});
-        // dataMap.put("categoryIds", new Integer[]{catPid, catCid});
+
         // 商品参数 attribute
         GoodsAttributeExample goodsAttributeExample = new GoodsAttributeExample();
-        goodsAttributeExample.createCriteria().andGoodsIdEqualTo(goodsId);
+        goodsAttributeExample.createCriteria().andGoodsIdEqualTo(goodsId).andDeletedEqualTo(false);
         List<GoodsAttribute> attributes = goodsAttributeMapper.selectByExample(goodsAttributeExample);
         goodsDetailBean.setAttributes(attributes);
+
         // 规格
         GoodsSpecificationExample goodsSpecificationExample = new GoodsSpecificationExample();
-        goodsSpecificationExample.createCriteria().andGoodsIdEqualTo(goodsId);
+        goodsSpecificationExample.createCriteria().andGoodsIdEqualTo(goodsId).andDeletedEqualTo(false);
         List<GoodsSpecification> specifications = goodsSpecificationMapper.selectByExample(goodsSpecificationExample);
         goodsDetailBean.setSpecifications(specifications);
+
         // products
         GoodsProductExample goodsProductExample = new GoodsProductExample();
-        goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId);
+        goodsProductExample.createCriteria().andGoodsIdEqualTo(goodsId).andDeletedEqualTo(false);
         List<GoodsProduct> products = goodsProductMapper.selectByExample(goodsProductExample);
         goodsDetailBean.setProducts(products);
 
