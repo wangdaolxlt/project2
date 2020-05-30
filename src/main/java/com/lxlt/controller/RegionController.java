@@ -2,7 +2,7 @@ package com.lxlt.controller;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Region;
-import com.lxlt.service.RegionService;
+import com.lxlt.service.regionservice.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

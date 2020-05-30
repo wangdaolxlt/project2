@@ -249,6 +249,9 @@
       cskaoyanmall_category
       where pid = #{id} and deleted = 0
   </select>
+    <select id="selectPidByid" resultType="java.lang.Integer">
+      select pid from cskaoyanmall_category where id = #{catCid}
+    </select>
 
 
   <select id="selectL1" resultType="com.lxlt.bean.CategoryL1Data">
@@ -259,7 +262,7 @@
     select  LAST_INSERT_ID();
   </select>
 
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_category
     <set>
       <if test="record.id != null">

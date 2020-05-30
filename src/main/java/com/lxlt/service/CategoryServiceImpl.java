@@ -22,6 +22,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Autowired
     CategoryMapper categoryMapper;
+
     @Override
     public BaseRespVo selectByLevel(String level) {
         List<CategoryListData> categoryListData = categoryMapper.selectByLevel("L1");

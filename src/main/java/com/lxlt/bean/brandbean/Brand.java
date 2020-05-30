@@ -1,4 +1,4 @@
-package com.lxlt.bean;
+package com.lxlt.bean.brandbean;
 
 import java.math.BigDecimal;
 import java.util.Date;

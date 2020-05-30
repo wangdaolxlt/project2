@@ -1,9 +1,7 @@
-package com.lxlt.service;
+package com.lxlt.service.regionservice;
 
-import com.lxlt.bean.GoodsExample;
 import com.lxlt.bean.Region;
 import com.lxlt.bean.RegionExample;
-import com.lxlt.mapper.GoodsMapper;
 import com.lxlt.mapper.RegionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

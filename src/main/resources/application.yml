@@ -4,9 +4,11 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/20_mall2
+    url: jdbc:mysql://localhost:3306/20_mall2?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
+mybatis:
+  type-handlers-package: com.lxlt.typehandler
   resources:
     static-locations: file:D:/WangDao/Project2/project2${map.uploadFileDirectory}
   mvc:

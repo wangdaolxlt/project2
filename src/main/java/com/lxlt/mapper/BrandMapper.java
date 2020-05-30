@@ -1,8 +1,10 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Brand;
+import com.lxlt.bean.brandbean.Brand;
 import com.lxlt.bean.BrandExample;
+import com.lxlt.bean.brandbean.SimpleBrand;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ public interface BrandMapper {
 
     int insertSelective(Brand record);
 
+    Integer insertSelectiveAndReturnId(Brand record);
+
     List<Brand> selectByExample(BrandExample example);
 
     Brand selectByPrimaryKey(Integer id);
@@ -28,4 +32,7 @@ public interface BrandMapper {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    @Select("select id as value, `name` as label from cskaoyanmall_brand")
+    List<SimpleBrand> selectAllSimpleBrand();
 }
