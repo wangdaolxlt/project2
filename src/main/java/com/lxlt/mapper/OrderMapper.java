@@ -2,6 +2,7 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.Order;
 import com.lxlt.bean.OrderExample;
+
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    //int selectDetail(Integer id);
+//List<Order> queryAllOrder();
+//    List<OrderListData> selectById(@Param("userId") Integer userId);
+//    List<OrderL1Data> selectL1(@Param("userId") Integer userId);
 }

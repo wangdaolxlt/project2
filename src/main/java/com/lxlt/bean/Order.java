@@ -1,5 +1,6 @@
 package com.lxlt.bean;
 
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -55,6 +56,7 @@ public class Order {
     private Date updateTime;
 
     private Boolean deleted;
+
 
     public Integer getId() {
         return id;
