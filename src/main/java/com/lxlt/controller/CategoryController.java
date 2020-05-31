@@ -3,7 +3,7 @@ package com.lxlt.controller;
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Category;
 import com.lxlt.bean.CategoryListData;
-import com.lxlt.service.CategoryService;
+import com.lxlt.service.categoryservice.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

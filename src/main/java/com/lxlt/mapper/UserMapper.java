@@ -2,12 +2,15 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.User;
 import com.lxlt.bean.UserExample;
+import com.lxlt.bean.statbean.StatUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface UserMapper {
     long countByExample(UserExample example);
+
+    List<StatUser> selectUsers();
 
     int deleteByExample(UserExample example);
 

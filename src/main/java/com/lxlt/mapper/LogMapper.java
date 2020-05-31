@@ -1,7 +1,7 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Log;
-import com.lxlt.bean.LogExample;
+import com.lxlt.bean.logbean.Log;
+import com.lxlt.bean.logbean.LogExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
