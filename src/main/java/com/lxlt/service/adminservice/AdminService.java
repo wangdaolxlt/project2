@@ -1,6 +1,6 @@
 package com.lxlt.service.adminservice;
 
-import com.lxlt.bean.adminbean.Admin;
+import com.lxlt.bean.Admin;
 import com.lxlt.bean.adminbean.AdminReq;
 
 import java.util.Map;

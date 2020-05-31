@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lxlt.mapper.RoleMapper">
-  <resultMap id="BaseResultMap" type="com.lxlt.bean.rolebean.Role">
+  <resultMap id="BaseResultMap" type="com.lxlt.bean.Role">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, name, `desc`, enabled, add_time, update_time, deleted
   </sql>
-  <select id="selectByExample" parameterType="com.lxlt.bean.rolebean.RoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.lxlt.bean.RoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,44 +91,25 @@
     from cskaoyanmall_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <resultMap id="OptionMap" type="com.lxlt.bean.rolebean.RoleOptions">
-    <id column="id" jdbcType="INTEGER" property="value" />
-    <result column="name" jdbcType="VARCHAR" property="label" />
-  </resultMap>
-  <select id="selectLabel" resultMap="OptionMap">
-     select id ,name
-     from cskaoyanmall_role
-     order by id
-  </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyanmall_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lxlt.bean.rolebean.RoleExample">
+  <delete id="deleteByExample" parameterType="com.lxlt.bean.RoleExample">
     delete from cskaoyanmall_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-<<<<<<< HEAD
   <insert id="insert" parameterType="com.lxlt.bean.Role">
-    insert into cskaoyanmall_role (id, name, `desc`,
-=======
-  <insert id="insert" parameterType="com.lxlt.bean.rolebean.Role">
     insert into cskaoyanmall_role (id, name, desc,
->>>>>>> 6558fc2e0c7200abd672fe1b87a8edf2dfba24ee
       enabled, add_time, update_time,
       deleted)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
       #{enabled,jdbcType=BIT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT})
   </insert>
-<<<<<<< HEAD
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Role" useGeneratedKeys="true" keyProperty="id">
-=======
-  <insert id="insertSelective" parameterType="com.lxlt.bean.rolebean.Role">
->>>>>>> 6558fc2e0c7200abd672fe1b87a8edf2dfba24ee
+  <insert id="insertSelective" parameterType="com.lxlt.bean.Role">
     insert into cskaoyanmall_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -177,16 +158,16 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lxlt.bean.rolebean.RoleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.lxlt.bean.RoleExample" resultType="java.lang.Long">
     select count(*) from cskaoyanmall_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="queryOptions" resultType="com.lxlt.bean.rolebean.RoleOptionsData">
-      select id as `value`, name as label from cskaoyanmall_role
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
+  <select id="queryOptions" resultType="com.lxlt.bean.rolebean.RoleOptionsData">
+    select id as `value`, name as label from cskaoyanmall_role
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_role
     <set>
       <if test="record.id != null">
@@ -228,7 +209,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lxlt.bean.rolebean.Role">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxlt.bean.Role">
     update cskaoyanmall_role
     <set>
       <if test="name != null">
@@ -252,7 +233,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.rolebean.Role">
+  <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.Role">
     update cskaoyanmall_role
     set name = #{name,jdbcType=VARCHAR},
       `desc` = #{desc,jdbcType=VARCHAR},
