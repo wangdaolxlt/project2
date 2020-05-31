@@ -1,4 +1,4 @@
-package com.lxlt.service;
+package com.lxlt.service.categoryservice;
 
 import com.lxlt.bean.*;
 import com.lxlt.mapper.CategoryMapper;
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(CategoryListData categoryListData) {
         CategoryExample categoryExample = new CategoryExample();
         //children为空，只需要将本身的deleted从0置为1
@@ -70,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Category create(Category requestCategory) {
         //先对requestCategory进行校验，level为L2时 ，不允许pid为0
         if("L2".equals(requestCategory.getLevel()) && requestCategory.getPid() == 0 ){
@@ -82,13 +82,11 @@ public class CategoryServiceImpl implements CategoryService{
         requestCategory.setUpdateTime(date);
         requestCategory.setDeleted(false);
         categoryMapper.insertSelective(requestCategory);
-        //取出新数据的id
-        requestCategory.setId(categoryMapper.getLastInsertId());
         return requestCategory;
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void update(Category requestCategory) {
         CategoryExample categoryExample = new CategoryExample();
         categoryExample.createCriteria().andIdEqualTo(requestCategory.getId());

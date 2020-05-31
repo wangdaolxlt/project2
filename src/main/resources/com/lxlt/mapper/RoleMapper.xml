@@ -174,7 +174,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="queryOptions" resultType="com.lxlt.bean.rolebean.RoleOptionsData">
+      select id as `value`, name as label from cskaoyanmall_role
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_role
     <set>
       <if test="record.id != null">
