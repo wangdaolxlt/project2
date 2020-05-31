@@ -1,6 +1,9 @@
 package com.lxlt.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
+import java.util.List;
 
 public class Admin {
     private Integer id;
@@ -15,13 +18,15 @@ public class Admin {
 
     private String avatar;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
 
-    private String roleIds;
+    private List roleIds;
 
     public Integer getId() {
         return id;
@@ -95,11 +100,11 @@ public class Admin {
         this.deleted = deleted;
     }
 
-    public String getRoleIds() {
+    public List getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds == null ? null : roleIds.trim();
+    public void setRoleIds(List roleIds) {
+        this.roleIds = roleIds;
     }
 }
