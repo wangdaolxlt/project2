@@ -2,6 +2,7 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.Role;
 import com.lxlt.bean.RoleExample;
+import com.lxlt.bean.rolebean.RoleOptionsData;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<RoleOptionsData> queryOptions();
 }
