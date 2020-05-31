@@ -18,3 +18,6 @@ map:
   port: ${server.port}
   uploadFileDirectory: /src/main/resources/static/pic/
   staticPath: ${spring.mvc.static-path-pattern}
+logging:
+  level:
+    com.lxlt.mapper: debug
