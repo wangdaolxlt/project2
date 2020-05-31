@@ -1,4 +1,4 @@
-package com.lxlt.bean;
+package com.lxlt.bean.keywordbean;
 
 import java.util.ArrayList;
 import java.util.Date;

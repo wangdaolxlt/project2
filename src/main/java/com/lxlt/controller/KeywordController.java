@@ -1,0 +1,85 @@
+package com.lxlt.controller;
+
+import com.lxlt.bean.Result;
+import com.lxlt.bean.keywordbean.Keyword;
+import com.lxlt.bean.keywordbean.KeywordReq;
+import com.lxlt.bean.keywordbean.KeywordRespVo;
+import com.lxlt.service.keywordservice.KeywordService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+import java.util.Map;
+
+@RestController
+@RequestMapping("admin/keyword")
+public class KeywordController {
+
+    @Autowired
+    KeywordService keywordService;
+
+    //分页查询
+    @RequestMapping("list")
+    public KeywordRespVo keywordList(KeywordReq keywordReq){
+        KeywordRespVo<Map<String,Object>> keywordRespVo = new KeywordRespVo();
+        Map<String, Object> map = keywordService.queryKeyword(keywordReq);
+        keywordRespVo.setData(map);
+        keywordRespVo.setErrno(0);
+        keywordRespVo.setErrmsg("成功");
+        return keywordRespVo;
+    }
+    //添加,要在相应的Mapper中添加@Options(useGeneratedKeys = true,keyProperty = "id")可以获取自增id
+
+
+
+    @RequestMapping("create")
+    public KeywordRespVo keywordCreate(@RequestBody Keyword keyword){
+        KeywordRespVo<Keyword> keywordRespVo = new KeywordRespVo();
+        keyword.setAddTime(new Date());
+        keyword.setUpdateTime(new Date());
+        keyword.setDeleted(false);
+        keyword.setSortOrder(100);
+        Integer integer = keywordService.insertKeyword(keyword);
+        if(integer == 1){
+            keywordRespVo.setData(keyword);
+            keywordRespVo.setErrno(0);
+            keywordRespVo.setErrmsg("成功");
+        }else{
+            keywordRespVo.setErrmsg("失败");
+            keywordRespVo.setErrno(10000);
+        }
+        return keywordRespVo;
+    }
+    //更新
+    @RequestMapping("update")
+    public KeywordRespVo keywordUpdate(@RequestBody Keyword keyword){
+        KeywordRespVo<Keyword> keywordRespVo = new KeywordRespVo();
+        Integer integer = keywordService.updateKeyword(keyword);
+        if(integer == 1){
+            keywordRespVo.setErrmsg("成功");
+            keywordRespVo.setErrno(0);
+            keywordRespVo.setData(keyword);
+        }else{
+            keywordRespVo.setErrmsg("失败");
+            keywordRespVo.setErrno(10000);
+        }
+        return keywordRespVo;
+    }
+
+    //删除
+    @RequestMapping("delete")
+    public Result keywordDelete(@RequestBody Keyword keyword){
+        Integer integer = keywordService.deleteKeyword(keyword);
+        Result result = new Result();
+        if(integer == 1){
+            result.setErrmsg("成功");
+            result.setErrno(0);
+        }else {
+            result.setErrno(10000);
+            result.setErrmsg("失败");
+        }
+        return result;
+    }
+}

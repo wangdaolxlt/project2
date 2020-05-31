@@ -29,5 +29,4 @@ public interface StorageMapper {
 
     int updateByPrimaryKey(Storage record);
 
-    Integer getLastInsertId();
 }

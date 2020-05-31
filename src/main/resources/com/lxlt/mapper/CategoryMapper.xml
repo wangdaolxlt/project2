@@ -119,7 +119,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Category">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.lxlt.bean.Category">
     insert into cskaoyanmall_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -256,10 +256,6 @@
 
   <select id="selectL1" resultType="com.lxlt.bean.CategoryL1Data">
       select id as value, name as label from cskaoyanmall_category where level = #{level} and cskaoyanmall_category.`deleted` = 0
-  </select>
-
-  <select id="getLastInsertId" resultType="java.lang.Integer">
-    select  LAST_INSERT_ID();
   </select>
 
     <update id="updateByExampleSelective" parameterType="map">

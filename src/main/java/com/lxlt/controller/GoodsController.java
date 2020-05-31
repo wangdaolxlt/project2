@@ -3,16 +3,13 @@ package com.lxlt.controller;
 import com.lxlt.bean.*;
 import com.lxlt.bean.goodsbean.GoodsDetailBean;
 import com.lxlt.bean.goodsbean.QueryGoodsBean;
-import com.lxlt.service.CategoryService;
+import com.lxlt.service.categoryservice.CategoryService;
 import com.lxlt.service.goodsservice.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.System;
-import java.util.List;
 import java.util.Map;
 
 /**

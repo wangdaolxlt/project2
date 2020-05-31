@@ -1,7 +1,8 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Keyword;
-import com.lxlt.bean.KeywordExample;
+import com.lxlt.bean.keywordbean.Keyword;
+import com.lxlt.bean.keywordbean.KeywordExample;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public interface KeywordMapper {
 
     int deleteByPrimaryKey(Integer id);
 
+    @Options(useGeneratedKeys = true,keyProperty = "id")
     int insert(Keyword record);
 
     int insertSelective(Keyword record);

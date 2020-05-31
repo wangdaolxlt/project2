@@ -1,4 +1,6 @@
-package com.lxlt.bean;
+package com.lxlt.bean.keywordbean;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -15,8 +17,10 @@ public class Keyword {
 
     private Integer sortOrder;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;

@@ -41,5 +41,4 @@ public interface CategoryMapper {
     @Select("select id as value, `name` as label from cskaoyanmall_category where pid=#{pid}")
     List<CategoryL1Data> selectCategoryByPid(@Param("pid") String levelOneId);
 
-    Integer getLastInsertId();
 }

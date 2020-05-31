@@ -1,7 +1,8 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Issue;
-import com.lxlt.bean.IssueExample;
+import com.lxlt.bean.issuebean.Issue;
+import com.lxlt.bean.issuebean.IssueExample;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public interface IssueMapper {
 
     int deleteByPrimaryKey(Integer id);
 
+    @Options(useGeneratedKeys = true,keyProperty = "id")
     int insert(Issue record);
 
     int insertSelective(Issue record);
