@@ -101,6 +101,13 @@
     from cskaoyanmall_user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectUsers" resultType="com.lxlt.bean.statbean.StatUser">
+    select
+      DATE_FORMAT(add_time,'%Y-%m-%d') as `day`,
+      count(id) as users
+    from cskaoyanmall_role
+    GROUP BY `day`
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyanmall_user
     where id = #{id,jdbcType=INTEGER}
@@ -234,7 +241,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectUserById" resultType="com.lxlt.bean.User">
+    select nickname,avatar from cskaoyanmall_user where id = #{id}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_user
     <set>
       <if test="record.id != null">

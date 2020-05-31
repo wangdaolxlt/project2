@@ -119,7 +119,8 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Ad">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.Ad" useGeneratedKeys="true"
+  keyProperty="id">
     insert into cskaoyanmall_ad
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -2,12 +2,15 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.OrderGoods;
 import com.lxlt.bean.OrderGoodsExample;
+import com.lxlt.bean.statbean.StatGoods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface OrderGoodsMapper {
     long countByExample(OrderGoodsExample example);
+
+    List<StatGoods> selectGoods();
 
     int deleteByExample(OrderGoodsExample example);
 

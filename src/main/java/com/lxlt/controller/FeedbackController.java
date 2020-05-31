@@ -1,8 +1,7 @@
 package com.lxlt.controller;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.service.AddressService;
-import com.lxlt.service.FeedbackService;
+import com.lxlt.service.feedbackservice.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

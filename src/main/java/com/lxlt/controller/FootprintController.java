@@ -1,8 +1,7 @@
 package com.lxlt.controller;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.service.CollectService;
-import com.lxlt.service.FootprintService;
+import com.lxlt.service.footprintservice.FootprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

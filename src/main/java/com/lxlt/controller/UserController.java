@@ -1,7 +1,7 @@
 package com.lxlt.controller;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.service.UserService;
+import com.lxlt.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

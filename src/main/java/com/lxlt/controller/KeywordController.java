@@ -1,9 +1,9 @@
 package com.lxlt.controller;
 
+import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Result;
 import com.lxlt.bean.keywordbean.Keyword;
 import com.lxlt.bean.keywordbean.KeywordReq;
-import com.lxlt.bean.keywordbean.KeywordRespVo;
 import com.lxlt.service.keywordservice.KeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +22,8 @@ public class KeywordController {
 
     //分页查询
     @RequestMapping("list")
-    public KeywordRespVo keywordList(KeywordReq keywordReq){
-        KeywordRespVo<Map<String,Object>> keywordRespVo = new KeywordRespVo();
+    public BaseRespVo keywordList(KeywordReq keywordReq){
+        BaseRespVo<Map<String,Object>> keywordRespVo = new BaseRespVo();
         Map<String, Object> map = keywordService.queryKeyword(keywordReq);
         keywordRespVo.setData(map);
         keywordRespVo.setErrno(0);
@@ -35,8 +35,8 @@ public class KeywordController {
 
 
     @RequestMapping("create")
-    public KeywordRespVo keywordCreate(@RequestBody Keyword keyword){
-        KeywordRespVo<Keyword> keywordRespVo = new KeywordRespVo();
+    public BaseRespVo keywordCreate(@RequestBody Keyword keyword){
+        BaseRespVo<Keyword> keywordRespVo = new BaseRespVo();
         keyword.setAddTime(new Date());
         keyword.setUpdateTime(new Date());
         keyword.setDeleted(false);
@@ -54,8 +54,8 @@ public class KeywordController {
     }
     //更新
     @RequestMapping("update")
-    public KeywordRespVo keywordUpdate(@RequestBody Keyword keyword){
-        KeywordRespVo<Keyword> keywordRespVo = new KeywordRespVo();
+    public BaseRespVo keywordUpdate(@RequestBody Keyword keyword){
+        BaseRespVo<Keyword> keywordRespVo = new BaseRespVo();
         Integer integer = keywordService.updateKeyword(keyword);
         if(integer == 1){
             keywordRespVo.setErrmsg("成功");
