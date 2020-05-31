@@ -312,45 +312,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <!--<select id="selectDetail" resultType="java.lang.Integer">-->
-    <!--select-->
-    <!--a.id,a.user_id,a.order_sn,a.order_status,-->
-    <!--a.consignee,a.mobile,a.address,a.message,-->
-    <!--a.goods_price,a.freight_price,a.coupon_price,-->
-    <!--a.integral_price,a.groupon_price,a.order_price,a.actual_price,-->
-    <!--a.comments,a.end_time,a.update_time,a.deleted,-->
-    <!--b.id,-->
-    <!--b.order_id,-->
-    <!--b.goods_id,-->
-    <!--b.goods_name,-->
-    <!--b.goods_sn,-->
-    <!--b.product_id,-->
-    <!--b.number,-->
-    <!--b.price,-->
-    <!--b.specifications,-->
-    <!--b.pic_url,-->
-    <!--b.comment,-->
-    <!--b.add_time,-->
-    <!--b.update_time,-->
-    <!--b.deleted-->
-
-    <!--from-->
-    <!--cskaoyanmall_order as a-->
-    <!--join cskaoyanmall_order_goods as b on a.id = b.id-->
-    <!--where-->
-    <!--a.user_id = #{userId}-->
-  <!--</select>-->
-  <!--<select id="selectById" resultType="com.lxlt.bean.OrderListData">-->
-
-  <!--</select>-->
-  <!--<select id="selectL1" resultType="com.lxlt.bean.OrderL1Data">-->
-    <!--select user_id as value, order_status as label from cskaoyanmall_category where user_id = #{userId}-->
-  <!--</select>-->
-
-
-  <!--<select id="selectL1" resultType="com.lxlt.bean.OrderL1Data">-->
-     <!--select id as value, name as label from cskaoyanmall_category where level = #{level}-->
-  <!--</select>-->
 
   <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_order
@@ -580,4 +541,25 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="ship">
+      update cskaoyanmall_order
+      <set>
+        <if test="orderShip.shipsn != null">
+          ship_sn = #{orderShip.shipSn},
+        </if>
+        <if test="orderShip.shipChannel != null">
+          ship_channel = #{orderShip.shipChannel},
+        </if>
+        <if test="orderShip.shipTime != null">
+          ship_time = #{orderShip.shipTime},
+        </if>
+        <if test="orderShip.shipTime != null">
+          update_time = #{orderShip.shipTime},
+        </if>
+        <if test="orderShip.status != null">
+          order_status = #{orderShip.status}
+        </if>
+      </set>
+      where id = #{orderShip.orderId}
+    </update>
 </mapper>

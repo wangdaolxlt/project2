@@ -1,8 +1,6 @@
 package com.lxlt.service;
 
-import com.lxlt.bean.BaseRespVo;
-import com.lxlt.bean.Order;
-import com.lxlt.bean.OrderQuery;
+import com.lxlt.bean.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,5 +23,9 @@ public interface OrderService {
      * 查看详情
      * @return
      */
-    Map<String,Object> queryOrderDetail();
+    Map<String,Object> queryOrderDetail(Integer id);//--detail
+
+    void refund(OrderRefound orderRefound);
+
+    boolean ship(OrderShip orderShip);
 }

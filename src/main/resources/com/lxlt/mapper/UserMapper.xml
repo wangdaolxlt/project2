@@ -234,7 +234,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectUserById" resultType="com.lxlt.bean.User">
+    select nickname,avatar from cskaoyanmall_user where id = #{id}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_user
     <set>
       <if test="record.id != null">
