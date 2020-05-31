@@ -19,7 +19,7 @@ public interface RoleService {
 
     Map queryRole(RoleQueryBean roleQueryBean);
 
-    Role createRole(Role requestRole);
+    Map createRole(Role requestRole);
 
     int updateRole(Role role);
 

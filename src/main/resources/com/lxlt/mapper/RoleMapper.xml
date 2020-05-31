@@ -165,7 +165,7 @@
     </if>
   </select>
   <select id="queryOptions" resultType="com.lxlt.bean.rolebean.RoleOptionsData">
-    select id as `value`, name as label from cskaoyanmall_role
+    select id as `value`, name as label from cskaoyanmall_role where deleted = 0
   </select>
   <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_role

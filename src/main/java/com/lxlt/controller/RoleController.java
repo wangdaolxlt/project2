@@ -54,12 +54,19 @@ public class RoleController {
     @RequestMapping("create")
     public BaseRespVo create (@RequestBody Role requestRole){
         BaseRespVo baseRespVo = new BaseRespVo();
-        Role role = roleService.createRole(requestRole);
-        if (role == null) {
+        Map map = roleService.createRole(requestRole);
+        int code = (int) map.get("code");
+        if(code == 640){
+            baseRespVo.setErrmsg("角色已存在");
+            baseRespVo.setErrno(640);
+            return baseRespVo;
+        }
+        if (code == 502) {
             baseRespVo.setErrmsg("服务器内部错误");
             baseRespVo.setErrno(502);
             return baseRespVo;
         }
+        Role role = (Role) map.get("role");
         baseRespVo.setErrno(0);
         baseRespVo.setData(role);
         baseRespVo.setErrmsg("成功");
@@ -70,7 +77,12 @@ public class RoleController {
     public BaseRespVo update (@RequestBody Role role){
         BaseRespVo baseRespVo = new BaseRespVo();
         int code = roleService.updateRole(role);
-        if (code != 200) {
+        if(code == 640){
+            baseRespVo.setErrno(640);
+            baseRespVo.setErrmsg("角色已存在");
+            return baseRespVo;
+        }
+        if (code == 502) {
             baseRespVo.setErrno(502);
             baseRespVo.setErrmsg("服务器内部错误");
             return baseRespVo;

@@ -60,23 +60,50 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Role createRole(Role requestRole) {
+    public Map createRole(Role requestRole) {
+        Map<String, Object> map = new HashMap();
+        //对角色名进行查重
+        RoleExample roleExample = new RoleExample();
+        roleExample.createCriteria().andIdGreaterThanOrEqualTo(0);
+        List<Role> roles = roleMapper.selectByExample(roleExample);
+        for (int i = 0; i < roles.size(); i++) {
+            if(requestRole.getName().equals(roles.get(i).getName())){
+                //角色已存在
+                map.put("code", 640);
+                return map;
+            }
+        }
         Date date = new Date();
         requestRole.setEnabled(true);
         requestRole.setDeleted(false);
         requestRole.setAddTime(date);
         requestRole.setUpdateTime(date);
-        roleMapper.insertSelective(requestRole);
-        return requestRole;
+        int code = roleMapper.insertSelective(requestRole);
+        if(code != 1){
+            map.put("code", 502);
+            return map;
+        }
+        map.put("code", 200);
+        map.put("role", requestRole);
+        return map;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateRole(Role role) {
-        role.setUpdateTime(new Date());
         RoleExample roleExample = new RoleExample();
-        roleExample.createCriteria().andIdEqualTo(role.getId());
-        int update = roleMapper.updateByExampleSelective(role, roleExample);
+        roleExample.createCriteria().andIdNotEqualTo(role.getId());
+        List<Role> roles = roleMapper.selectByExample(roleExample);
+        for (int i = 0; i < roles.size(); i++) {
+            if(role.getName().equals(roles.get(i).getName())){
+                //角色已存在
+                return 640;
+            }
+        }
+        role.setUpdateTime(new Date());
+        RoleExample roleExample1 = new RoleExample();
+        roleExample1.createCriteria().andIdEqualTo(role.getId());
+        int update = roleMapper.updateByExampleSelective(role, roleExample1);
         if(update != 1){
             return 500;
         }

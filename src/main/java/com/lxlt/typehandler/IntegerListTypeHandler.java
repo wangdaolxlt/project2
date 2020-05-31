@@ -21,40 +21,40 @@ import java.util.List;
  * project name: project2
  */
 @MappedTypes(List.class)
-public class IntegerListTypeHandler implements TypeHandler<List<Integer>> {
+public class IntegerListTypeHandler implements TypeHandler<List> {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
     @SneakyThrows
     @Override
-    public void setParameter(PreparedStatement preparedStatement, int i, List<Integer> integers, JdbcType jdbcType) throws SQLException {
+    public void setParameter(PreparedStatement preparedStatement, int i, List integers, JdbcType jdbcType) throws SQLException {
         String s = objectMapper.writeValueAsString(integers);
         preparedStatement.setString(i, s);
     }
 
     @Override
-    public List<Integer> getResult(ResultSet resultSet, String s) throws SQLException {
+    public List getResult(ResultSet resultSet, String s) throws SQLException {
         String json = resultSet.getString(s);
         return transfer(json);
     }
 
     @Override
-    public List<Integer> getResult(ResultSet resultSet, int i) throws SQLException {
+    public List getResult(ResultSet resultSet, int i) throws SQLException {
         String json = resultSet.getString(i);
         return transfer(json);
     }
 
     @Override
-    public List<Integer> getResult(CallableStatement callableStatement, int i) throws SQLException {
+    public List getResult(CallableStatement callableStatement, int i) throws SQLException {
         String json = callableStatement.getString(i);
         return transfer(json);
     }
 
-    private List<Integer> transfer(String json){
+    private List transfer(String json){
         if (json == null) {
             return null;
         }
-        List<Integer> list = null;
+        List list = null;
         try {
             list = objectMapper.readValue(json, List.class);
         } catch (JsonProcessingException e) {
