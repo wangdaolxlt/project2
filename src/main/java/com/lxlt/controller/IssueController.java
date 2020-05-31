@@ -1,9 +1,9 @@
 package com.lxlt.controller;
 
+import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Result;
 import com.lxlt.bean.issuebean.Issue;
 import com.lxlt.bean.issuebean.IssueRep;
-import com.lxlt.bean.issuebean.IssueRespVo;
 import com.lxlt.service.issueservice.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +19,8 @@ public class IssueController {
     @Autowired
     IssueService issueService;
     @RequestMapping("list")
-    public IssueRespVo listQuestion(IssueRep issueRep){
-        IssueRespVo<Map<String,Object>> issueResp = new IssueRespVo();
+    public BaseRespVo listQuestion(IssueRep issueRep){
+        BaseRespVo<Map<String,Object>> issueResp = new BaseRespVo();
         Map<String, Object> map = issueService.queryIssue(issueRep);
         issueResp.setErrno(0);
         issueResp.setData(map);
@@ -29,8 +29,8 @@ public class IssueController {
     }
    //添加
     @RequestMapping("create")
-    public IssueRespVo creatQuestion(@RequestBody Issue issue){
-        IssueRespVo<Issue> addResult = new IssueRespVo<>();
+    public BaseRespVo creatQuestion(@RequestBody Issue issue){
+        BaseRespVo<Issue> addResult = new BaseRespVo<>();
         issue.setAddTime(new Date());
         issue.setUpdateTime(new Date());
         issue.setDeleted(false);
@@ -48,9 +48,9 @@ public class IssueController {
 
     //更新
     @RequestMapping("update")
-    public IssueRespVo updateQuestion(@RequestBody Issue issue){
+    public BaseRespVo updateQuestion(@RequestBody Issue issue){
         issue.setUpdateTime(new Date());
-        IssueRespVo<Issue> updateResult = new IssueRespVo<>();
+        BaseRespVo<Issue> updateResult = new BaseRespVo<>();
         Integer integer = issueService.updateIssue(issue);
         if(integer == 1) {
             updateResult.setData(issue);

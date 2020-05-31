@@ -1,7 +1,7 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Admin;
-import com.lxlt.bean.AdminExample;
+import com.lxlt.bean.adminbean.Admin;
+import com.lxlt.bean.adminbean.AdminExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

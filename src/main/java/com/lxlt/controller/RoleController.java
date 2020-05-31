@@ -1,8 +1,6 @@
 package com.lxlt.controller;
-
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Role;
-import com.lxlt.bean.Topic;
 import com.lxlt.bean.rolebean.RoleOptionsData;
 import com.lxlt.bean.rolebean.RoleQueryBean;
 import com.lxlt.service.roleservice.RoleService;
@@ -29,21 +27,20 @@ public class RoleController {
     RoleService roleService;
 
     @RequestMapping("options")
-    public BaseRespVo options(){
+    public BaseRespVo options() {
         BaseRespVo baseRespVo = new BaseRespVo();
         List<RoleOptionsData> roleOptionsDataList = roleService.queryOptions();
         baseRespVo.setData(roleOptionsDataList);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
-
     }
 
     @RequestMapping("list")
-    public BaseRespVo list(RoleQueryBean roleQueryBean){
+    public BaseRespVo list (RoleQueryBean roleQueryBean){
         BaseRespVo baseRespVo = new BaseRespVo();
         Map roleMap = roleService.queryRole(roleQueryBean);
-        if(roleMap == null){
+        if (roleMap == null) {
             baseRespVo.setErrmsg("服务器内部错误");
             baseRespVo.setErrno(502);
             return baseRespVo;
@@ -55,10 +52,10 @@ public class RoleController {
     }
 
     @RequestMapping("create")
-    public BaseRespVo create(@RequestBody Role requestRole){
+    public BaseRespVo create (@RequestBody Role requestRole){
         BaseRespVo baseRespVo = new BaseRespVo();
         Role role = roleService.createRole(requestRole);
-        if(role == null){
+        if (role == null) {
             baseRespVo.setErrmsg("服务器内部错误");
             baseRespVo.setErrno(502);
             return baseRespVo;
@@ -70,10 +67,10 @@ public class RoleController {
     }
 
     @RequestMapping("update")
-    public BaseRespVo update(@RequestBody Role role){
+    public BaseRespVo update (@RequestBody Role role){
         BaseRespVo baseRespVo = new BaseRespVo();
         int code = roleService.updateRole(role);
-        if(code != 200){
+        if (code != 200) {
             baseRespVo.setErrno(502);
             baseRespVo.setErrmsg("服务器内部错误");
             return baseRespVo;
@@ -84,15 +81,15 @@ public class RoleController {
     }
 
     @RequestMapping("delete")
-    public BaseRespVo delete(@RequestBody Role role){
+    public BaseRespVo delete (@RequestBody Role role){
         BaseRespVo baseRespVo = new BaseRespVo();
         int code = roleService.deleteById(role);
-        if(code == 500){
+        if (code == 500) {
             baseRespVo.setErrno(642);
             baseRespVo.setErrmsg("当前角色存在管理员，不能删除");
             return baseRespVo;
         }
-        if(code == 501){
+        if (code == 501) {
             baseRespVo.setErrno(502);
             baseRespVo.setErrmsg("服务器内部错误");
             return baseRespVo;

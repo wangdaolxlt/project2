@@ -1,4 +1,4 @@
-package com.lxlt.bean;
+package com.lxlt.bean.adminbean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -26,7 +26,12 @@ public class Admin {
 
     private Boolean deleted;
 
+<<<<<<< HEAD:src/main/java/com/lxlt/bean/Admin.java
     private List roleIds;
+=======
+//    private List<Integer> roleIds;
+    private String roleIds;
+>>>>>>> 6558fc2e0c7200abd672fe1b87a8edf2dfba24ee:src/main/java/com/lxlt/bean/adminbean/Admin.java
 
     public Integer getId() {
         return id;
@@ -100,6 +105,7 @@ public class Admin {
         this.deleted = deleted;
     }
 
+<<<<<<< HEAD:src/main/java/com/lxlt/bean/Admin.java
     public List getRoleIds() {
         return roleIds;
     }
@@ -107,4 +113,13 @@ public class Admin {
     public void setRoleIds(List roleIds) {
         this.roleIds = roleIds;
     }
+=======
+//    public List<Integer> getRoleIds() {
+//        return roleIds;
+//    }
+//
+//    public void setRoleIds(List<Integer> roleIds) {
+//        this.roleIds = roleIds;
+//    }
+>>>>>>> 6558fc2e0c7200abd672fe1b87a8edf2dfba24ee:src/main/java/com/lxlt/bean/adminbean/Admin.java
 }
