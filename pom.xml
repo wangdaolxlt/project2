@@ -49,7 +49,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
             <scope>runtime</scope>
-            <version>5.1.47</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

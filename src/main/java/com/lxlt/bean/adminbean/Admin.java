@@ -1,6 +1,7 @@
-package com.lxlt.bean;
+package com.lxlt.bean.adminbean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Admin {
     private Integer id;
@@ -21,6 +22,7 @@ public class Admin {
 
     private Boolean deleted;
 
+//    private List<Integer> roleIds;
     private String roleIds;
 
     public Integer getId() {
@@ -95,11 +97,11 @@ public class Admin {
         this.deleted = deleted;
     }
 
-    public String getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds == null ? null : roleIds.trim();
-    }
+//    public List<Integer> getRoleIds() {
+//        return roleIds;
+//    }
+//
+//    public void setRoleIds(List<Integer> roleIds) {
+//        this.roleIds = roleIds;
+//    }
 }

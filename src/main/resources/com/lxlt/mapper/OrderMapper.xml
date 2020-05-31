@@ -113,6 +113,16 @@
     from cskaoyanmall_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectOrder" resultType="com.lxlt.bean.statbean.StatOrder">
+     select
+            sum(actual_price) as amount,
+            count(id) as orders ,
+            count(DISTINCT user_id) as customers,
+            DATE_FORMAT(add_time,'%Y-%m-%d') as `day`,
+            ROUND((sum(actual_price)) / count(DISTINCT user_id)) as pcr
+            from cskaoyanmall_order
+            GROUP BY `day`
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyanmall_order
     where id = #{id,jdbcType=INTEGER}

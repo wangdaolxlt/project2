@@ -99,6 +99,15 @@
     from cskaoyanmall_order_goods
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectGoods" resultType="com.lxlt.bean.statbean.StatGoods">
+    select
+           sum(price) as amount,
+           count(id) as orders,
+           DATE_FORMAT(add_time,'%Y-%m-%d') as `day`,
+           sum(number) as products
+    from cskaoyanmall_order_goods
+    GROUP BY `day`
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cskaoyanmall_order_goods
     where id = #{id,jdbcType=INTEGER}
