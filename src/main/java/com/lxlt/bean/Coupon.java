@@ -3,7 +3,9 @@ package com.lxlt.bean;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class Coupon {
     private Integer id;
@@ -28,7 +30,8 @@ public class Coupon {
 
     private Short goodsType;
 
-    private String goodsValue;
+    //String -> List<String>
+    private List<String> goodsValue;
 
     private String code;
 
@@ -136,12 +139,12 @@ public class Coupon {
         this.goodsType = goodsType;
     }
 
-    public String getGoodsValue() {
+    public List<String> getGoodsValue() {
         return goodsValue;
     }
 
-    public void setGoodsValue(String goodsValue) {
-        this.goodsValue = goodsValue == null ? null : goodsValue.trim();
+    public void setGoodsValue(List<String> goodsValue) {
+        this.goodsValue = goodsValue;
     }
 
     public String getCode() {
