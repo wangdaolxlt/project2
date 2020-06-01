@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, keywords, desc, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
+    id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
     deleted
   </sql>
   <select id="selectByExample" parameterType="com.lxlt.bean.CategoryExample" resultMap="BaseResultMap">
@@ -257,6 +257,10 @@
   <select id="selectL1" resultType="com.lxlt.bean.CategoryL1Data">
       select id as value, name as label from cskaoyanmall_category where level = #{level} and cskaoyanmall_category.`deleted` = 0
   </select>
+
+    <select id="selectMinId" resultType="java.lang.Integer">
+      select min(id) id from cskaoyanmall_category where deleted = 0
+    </select>
 
     <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_category
