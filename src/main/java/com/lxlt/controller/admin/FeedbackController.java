@@ -1,7 +1,7 @@
-package com.lxlt.controller;
+package com.lxlt.controller.admin;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.service.userservice.UserService;
+import com.lxlt.service.feedbackservice.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +19,16 @@ import java.util.HashMap;
  */
 
 @RestController
-@RequestMapping("admin/user")
-public class UserController {
+@RequestMapping("admin/feedback")
+public class FeedbackController {
 
     @Autowired
-    UserService userService;
+    FeedbackService feedbackService;
 
     @RequestMapping("list")
     public BaseRespVo list() {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        HashMap<String, Object> hashMap = userService.queryAllUsers();
+        HashMap<String, Object> hashMap = feedbackService.queryAllFeedback();
         baseRespVo.setData(hashMap);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");

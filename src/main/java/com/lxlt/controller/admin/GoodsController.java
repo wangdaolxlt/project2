@@ -1,4 +1,4 @@
-package com.lxlt.controller;
+package com.lxlt.controller.admin;
 
 import com.lxlt.bean.*;
 import com.lxlt.bean.goodsbean.GoodsDetailBean;

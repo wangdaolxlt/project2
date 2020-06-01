@@ -1,4 +1,4 @@
-package com.lxlt.controller;
+package com.lxlt.controller.admin;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Category;

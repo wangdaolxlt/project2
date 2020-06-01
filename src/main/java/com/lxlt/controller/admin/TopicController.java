@@ -1,84 +1,79 @@
-package com.lxlt.controller;
+package com.lxlt.controller.admin;
 
-import com.lxlt.bean.BaseQueryBean;
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.bean.Storage;
-import com.lxlt.bean.storagebean.StorageQueryBean;
-import com.lxlt.service.storageservice.StorageService;
+import com.lxlt.bean.Topic;
+import com.lxlt.bean.topicbean.TopicQueryBean;
+import com.lxlt.service.topicservice.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
 /**
  * @PackgeName: com.lxlt.controller
- * @ClassName: StorageController
+ * @ClassName: TopicController
  * @Author: Li Haiquan
- * Date: 2020/5/29 16:17
+ * Date: 2020/5/30 15:18
  * project name: project2
  */
 @RestController
-@RequestMapping("admin/storage")
-public class StorageController {
+@RequestMapping("admin/topic")
+public class TopicController {
 
     @Autowired
-    StorageService storageService;
-
-    @RequestMapping("create")
-    public BaseRespVo create(MultipartFile file){
-        BaseRespVo<Storage> baseRespVo = new BaseRespVo<>();
-        Storage storage = new Storage();
-        try{
-            storage = storageService.create(file);
-        }catch (Exception e){
-            e.printStackTrace();
-            baseRespVo.setErrno(502);
-            baseRespVo.setErrmsg("服务器错误");
-            return baseRespVo;
-        }
-        baseRespVo.setErrmsg("成功");
-        baseRespVo.setData(storage);
-        baseRespVo.setErrno(0);
-        return baseRespVo;
-    }
+    TopicService topicService;
 
     @RequestMapping("list")
-    public BaseRespVo list(StorageQueryBean storageQueryBean){
+    public BaseRespVo list(TopicQueryBean topicQueryBean){
         BaseRespVo baseRespVo = new BaseRespVo();
-        Map storageMap = storageService.queryTopic(storageQueryBean);
-        if(storageMap == null){
+        Map topicMap = topicService.queryTopic(topicQueryBean);
+        if(topicMap == null){
             baseRespVo.setErrmsg("服务器内部错误");
             baseRespVo.setErrno(502);
             return baseRespVo;
         }
         baseRespVo.setErrno(0);
-        baseRespVo.setData(storageMap);
+        baseRespVo.setData(topicMap);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
+    @RequestMapping("create")
+    public BaseRespVo create(@RequestBody Topic requestTopic){
+        BaseRespVo baseRespVo = new BaseRespVo();
+        Topic topic = topicService.createTopic(requestTopic);
+        if(topic == null){
+            baseRespVo.setErrmsg("服务器内部错误");
+            baseRespVo.setErrno(502);
+            return baseRespVo;
+        }
+        baseRespVo.setErrno(0);
+        baseRespVo.setData(topic);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
 
     @RequestMapping("update")
-    public BaseRespVo update(@RequestBody Storage requestStorage) {
+    public BaseRespVo update(@RequestBody Topic requestTopic){
         BaseRespVo baseRespVo = new BaseRespVo();
-        Storage updateStorage = storageService.updateStorage(requestStorage);
-        if (updateStorage == null) {
+        Topic updateTopic = topicService.updateTopic(requestTopic);
+        if(updateTopic == null){
             baseRespVo.setErrmsg("服务器内部错误");
             baseRespVo.setErrno(502);
             return baseRespVo;
         }
         baseRespVo.setErrno(0);
-        baseRespVo.setData(updateStorage);
+        baseRespVo.setData(updateTopic);
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
 
     @RequestMapping("delete")
-    public BaseRespVo delete(@RequestBody Storage storage){
+    public BaseRespVo delete(@RequestBody Topic topic){
         BaseRespVo baseRespVo = new BaseRespVo();
-        int code = storageService.deleteById(storage);
+        int code = topicService.deleteById(topic);
         if(code != 200){
             baseRespVo.setErrno(502);
             baseRespVo.setErrmsg("服务器内部错误");

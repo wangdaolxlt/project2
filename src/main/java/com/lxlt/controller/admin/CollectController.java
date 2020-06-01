@@ -1,7 +1,7 @@
-package com.lxlt.controller;
+package com.lxlt.controller.admin;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.service.historyservice.HistoryService;
+import com.lxlt.service.collectservice.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +19,16 @@ import java.util.HashMap;
  */
 
 @RestController
-@RequestMapping("admin/history")
-public class HistoryController {
+@RequestMapping("admin/collect")
+public class CollectController {
 
     @Autowired
-    HistoryService historyService;
+    CollectService collectService;
 
     @RequestMapping("list")
     public BaseRespVo list() {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        HashMap<String, Object> hashMap = historyService.queryAllHistories();
+        HashMap<String, Object> hashMap = collectService.queryAllCollections();
         baseRespVo.setData(hashMap);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
