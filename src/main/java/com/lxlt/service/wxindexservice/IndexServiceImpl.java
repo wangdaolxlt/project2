@@ -9,6 +9,7 @@ import com.lxlt.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class IndexServiceImpl implements IndexService {
 
         // 查询 channel
         CategoryExample categoryExample = new CategoryExample();
-        categoryExample.createCriteria().andDeletedEqualTo(false);
+        categoryExample.createCriteria().andDeletedEqualTo(false).andPidEqualTo(0);
         List<Category> categoryList = categoryMapper.selectCategoryByExampleToIndex(categoryExample);
         dataMap.put("channel", categoryList);
 
@@ -99,17 +100,30 @@ public class IndexServiceImpl implements IndexService {
         // 限制查询数量
         PageHelper.startPage(1, 4);
         CategoryExample floorCategoryExample = new CategoryExample();
-        floorCategoryExample.createCriteria().andDeletedEqualTo(false);
-        List<WxIndexFloorGoods> floorGoodsList = categoryMapper.selectFloorGoodsByExampleToIndex(floorCategoryExample);
+        floorCategoryExample.createCriteria().andDeletedEqualTo(false).andPidEqualTo(0);
+        List<WxIndexFloorGoods> floorLevel1CatList = categoryMapper.selectFloorGoodsByExampleToIndex(floorCategoryExample);
 
-        for (WxIndexFloorGoods wxIndexFloorGoods : floorGoodsList) {
-            Integer categoryId = wxIndexFloorGoods.getId();
-            GoodsExample floorGoodsExample = new GoodsExample();
-            floorGoodsExample.createCriteria().andDeletedEqualTo(false).andCategoryIdEqualTo(categoryId);
-            List<Goods> goodsList = goodsMapper.selectGoodsByExampleToIndex(floorGoodsExample);
-            wxIndexFloorGoods.setGoodsList(goodsList);
+        for (WxIndexFloorGoods wxIndexFloorGoods : floorLevel1CatList) {
+            Integer categoryPidId = wxIndexFloorGoods.getId();
+            CategoryExample level2CatExample = new CategoryExample();
+            level2CatExample.createCriteria().andDeletedEqualTo(false).andPidEqualTo(categoryPidId);
+            List<WxIndexFloorGoods> level2Categorys = categoryMapper.selectFloorGoodsByExampleToIndex(level2CatExample);
+            for (WxIndexFloorGoods level2Category : level2Categorys) {
+                Integer categoryId = level2Category.getId();
+                GoodsExample floorGoodsExample = new GoodsExample();
+                floorGoodsExample.createCriteria().andDeletedEqualTo(false).andCategoryIdEqualTo(categoryId);
+                List<Goods> goodsList = goodsMapper.selectGoodsByExampleToIndex(floorGoodsExample);
+
+                if (goodsList != null && goodsList.size() > 0) {
+                    if (wxIndexFloorGoods.getGoodsList() == null) {
+                        wxIndexFloorGoods.setGoodsList(new ArrayList<>());
+                    }
+                    wxIndexFloorGoods.getGoodsList().add(goodsList.get(0));
+                }
+            }
         }
-        dataMap.put("floorGoodsList", floorGoodsList);
+
+        dataMap.put("floorGoodsList", floorLevel1CatList);
 
         return dataMap;
     }
