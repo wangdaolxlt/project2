@@ -13,6 +13,11 @@
     <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+  <resultMap id="WxIndexResultMap" type="com.lxlt.bean.wx.index.WxIndexGroupon">
+    <result column="goods_id" jdbcType="VARCHAR" property="goods.id" />
+    <result column="discount" jdbcType="DECIMAL" property="groupon_price" />
+    <result column="discount_member" jdbcType="INTEGER" property="groupon_member" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -75,12 +80,29 @@
     id, goods_id, goods_name, pic_url, discount, discount_member, add_time, update_time,
     expire_time, deleted
   </sql>
+  <sql id="Wx_Index_Column_List">
+    goods_id, discount, discount_member
+  </sql>
   <select id="selectByExample" parameterType="com.lxlt.bean.GrouponRulesExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
+    from cskaoyanmall_groupon_rules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectGrouponRulesByExampleToIndex" parameterType="com.lxlt.bean.GrouponRulesExample" resultMap="WxIndexResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Wx_Index_Column_List" />
     from cskaoyanmall_groupon_rules
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
