@@ -1,6 +1,7 @@
 package com.lxlt.controller.admin;
 
 import com.lxlt.bean.BaseRespVo;
+import com.lxlt.bean.addressbean.AddressReq;
 import com.lxlt.service.addressservice.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,9 @@ public class AddressController {
     AddressService addressService;
 
     @RequestMapping("list")
-    public BaseRespVo list() {
+    public BaseRespVo list(AddressReq addressReq) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        HashMap<String, Object> hashMap = addressService.queryAllAddresses();
+        HashMap<String, Object> hashMap = addressService.queryAllAddresses(addressReq);
         baseRespVo.setData(hashMap);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");

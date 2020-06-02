@@ -29,5 +29,5 @@ public interface RegionMapper {
 
     int updateByPrimaryKey(Region record);
 
-    List<Region> queryAllRegionAndCategorize();
+//    List<Region> queryAllRegionAndCategorize();
 }

@@ -1,8 +1,12 @@
 package com.lxlt.service.addressservice;
 
 
-import com.lxlt.bean.Address;
+import com.github.pagehelper.PageHelper;
+import com.lxlt.bean.addressbean.Address;
 import com.lxlt.bean.AddressExample;
+import com.lxlt.bean.addressbean.AddressReq;
+import com.lxlt.bean.addressbean.WxAddressDetailBean;
+import com.lxlt.bean.addressbean.WxAddressListBean;
 import com.lxlt.mapper.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +31,8 @@ public class AddressServiceImpl implements AddressService {
     AddressMapper addressMapper;
 
     @Override
-    public HashMap<String, Object> queryAllAddresses() {
+    public HashMap<String, Object> queryAllAddresses(AddressReq addressReq) {
+        PageHelper.startPage(addressReq.getPage(), addressReq.getLimit());
         AddressExample addressExample = new AddressExample();
         addressExample.createCriteria().andIdGreaterThan(0);
 
@@ -38,5 +43,15 @@ public class AddressServiceImpl implements AddressService {
         hashMap.put("items", addressList);
         hashMap.put("total", addressNum);
         return hashMap;
+    }
+
+    @Override
+    public List<WxAddressListBean> queryWxAllAddresses() {
+        return addressMapper.selectWxAddressList();
+    }
+
+    @Override
+    public WxAddressDetailBean queryWxDetailAddress(Integer id) {
+        return addressMapper.selectWxDetailAddress(id);
     }
 }
