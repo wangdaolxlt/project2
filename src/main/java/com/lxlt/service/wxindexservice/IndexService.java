@@ -1,4 +1,4 @@
-package com.lxlt.controller.wx;
+package com.lxlt.service.wxindexservice;
 
 import java.util.Map;
 

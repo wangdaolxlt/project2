@@ -1,12 +1,10 @@
 package com.lxlt.service.wxindexservice;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.util.PageObjectUtil;
 import com.lxlt.bean.*;
 import com.lxlt.bean.brandbean.Brand;
 import com.lxlt.bean.wx.index.WxIndexFloorGoods;
 import com.lxlt.bean.wx.index.WxIndexGroupon;
-import com.lxlt.controller.wx.IndexService;
 import com.lxlt.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

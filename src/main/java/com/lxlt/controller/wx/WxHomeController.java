@@ -1,6 +1,7 @@
 package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
+import com.lxlt.service.wxindexservice.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
