@@ -1,7 +1,5 @@
 package com.lxlt.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Role {
@@ -13,13 +11,13 @@ public class Role {
 
     private Boolean enabled;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
+
+    private String[] permissions;
 
     public Integer getId() {
         return id;
@@ -75,5 +73,13 @@ public class Role {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String[] getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String[] permissions) {
+        this.permissions = permissions;
     }
 }

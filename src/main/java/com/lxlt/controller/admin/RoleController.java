@@ -2,11 +2,13 @@ package com.lxlt.controller.admin;
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Role;
 import com.lxlt.bean.rolebean.RoleOptionsData;
+import com.lxlt.bean.rolebean.RolePermissionReqVo;
 import com.lxlt.bean.rolebean.RoleQueryBean;
 import com.lxlt.service.roleservice.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -108,6 +110,13 @@ public class RoleController {
         }
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
+    @RequestMapping(value = "permissions", method = RequestMethod.GET)
+    public BaseRespVo roleGetPermissions(RolePermissionReqVo reqVo){
+        BaseRespVo baseRespVo = new BaseRespVo();
+        int roleId = reqVo.getRoleId();
         return baseRespVo;
     }
 }

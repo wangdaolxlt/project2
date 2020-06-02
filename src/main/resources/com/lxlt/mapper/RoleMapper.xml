@@ -9,6 +9,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="permissions" jdbcType="VARCHAR" property="permissions" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, `desc`, enabled, add_time, update_time, deleted
+    id, name, `desc`, enabled, add_time, update_time, deleted, permissions
   </sql>
   <select id="selectByExample" parameterType="com.lxlt.bean.RoleExample" resultMap="BaseResultMap">
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.lxlt.bean.Role">
-    insert into cskaoyanmall_role (id, name, desc,
+    insert into cskaoyanmall_role (id, name, `desc`,
       enabled, add_time, update_time,
-      deleted)
+      deleted, permissions)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
       #{enabled,jdbcType=BIT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-      #{deleted,jdbcType=BIT})
+      #{deleted,jdbcType=BIT}, #{permissions,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lxlt.bean.Role">
     insert into cskaoyanmall_role
@@ -133,6 +134,9 @@
       <if test="deleted != null">
         deleted,
       </if>
+      <if test="permissions != null">
+        permissions,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -156,6 +160,9 @@
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
+      <if test="permissions != null">
+        #{permissions,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.lxlt.bean.RoleExample" resultType="java.lang.Long">
@@ -164,6 +171,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <select id="queryOptions" resultType="com.lxlt.bean.rolebean.RoleOptionsData">
     select id as `value`, name as label from cskaoyanmall_role where deleted = 0
   </select>
@@ -191,6 +199,9 @@
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
+      <if test="record.permissions != null">
+        permissions = #{record.permissions,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -204,7 +215,8 @@
       enabled = #{record.enabled,jdbcType=BIT},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      deleted = #{record.deleted,jdbcType=BIT}
+      deleted = #{record.deleted,jdbcType=BIT},
+      permissions = #{record.permissions,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -230,6 +242,9 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
+      <if test="permissions != null">
+        permissions = #{permissions,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -240,7 +255,8 @@
       enabled = #{enabled,jdbcType=BIT},
       add_time = #{addTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
+      deleted = #{deleted,jdbcType=BIT},
+      permissions = #{permissions,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
