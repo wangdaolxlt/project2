@@ -1,6 +1,7 @@
 package com.lxlt.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Role {
     private Integer id;
@@ -17,7 +18,7 @@ public class Role {
 
     private Boolean deleted;
 
-    private String[] permissions;
+    private List permissions;
 
     public Integer getId() {
         return id;
@@ -75,11 +76,11 @@ public class Role {
         this.deleted = deleted;
     }
 
-    public String[] getPermissions() {
+    public List getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(String[] permissions) {
+    public void setPermissions(List permissions) {
         this.permissions = permissions;
     }
 }

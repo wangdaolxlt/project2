@@ -13,7 +13,7 @@ import java.util.List;
  * Date: 2020/5/28 18:00
  */
 @Service
-public class RegionServiceImpl implements RegionService {
+public class  RegionServiceImpl implements RegionService {
 
     @Autowired
     RegionMapper regionMapper;

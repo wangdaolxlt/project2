@@ -1,6 +1,7 @@
 package com.lxlt.service.roleservice;
 
 import com.lxlt.bean.Role;
+import com.lxlt.bean.rolebean.PostPermissionReqVo;
 import com.lxlt.bean.rolebean.RoleOptionsData;
 import com.lxlt.bean.rolebean.RoleQueryBean;
 
@@ -24,4 +25,8 @@ public interface RoleService {
     int updateRole(Role role);
 
     int deleteById(Role role);
+
+    Map roleGetPermissions(int roleId);
+
+    int rolePostPermissions(PostPermissionReqVo postPermissionReqVo);
 }

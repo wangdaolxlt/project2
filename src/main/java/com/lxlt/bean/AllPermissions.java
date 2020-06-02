@@ -1,5 +1,7 @@
 package com.lxlt.bean;
 
+import java.util.List;
+
 public class AllPermissions {
     private Integer primaryId;
 
@@ -10,6 +12,16 @@ public class AllPermissions {
     private Integer pid;
 
     private String api;
+
+    private List<AllPermissions> children;
+
+    public List<AllPermissions> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<AllPermissions> children) {
+        this.children = children;
+    }
 
     public Integer getPrimaryId() {
         return primaryId;

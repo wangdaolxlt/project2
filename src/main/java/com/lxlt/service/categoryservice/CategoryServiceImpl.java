@@ -48,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService{
     public void delete(CategoryListData categoryListData) {
         CategoryExample categoryExample = new CategoryExample();
         //children为空，只需要将本身的deleted从0置为1
-        if(categoryListData.getChildren() == null){
+        if(categoryListData.getChildren().size() == 0){
             categoryExample.createCriteria().andIdEqualTo(categoryListData.getId());
             Category category = new Category();
             category.setUpdateTime(new Date());

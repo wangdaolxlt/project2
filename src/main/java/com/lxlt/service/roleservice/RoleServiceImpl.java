@@ -4,18 +4,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
 import com.lxlt.bean.*;
+import com.lxlt.bean.rolebean.PostPermissionReqVo;
 import com.lxlt.bean.rolebean.RoleOptionsData;
 import com.lxlt.bean.rolebean.RoleQueryBean;
 import com.lxlt.mapper.AdminMapper;
+import com.lxlt.mapper.AllPermissionsMapper;
 import com.lxlt.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @PackgeName: com.lxlt.service.roleservice
@@ -31,6 +30,8 @@ public class RoleServiceImpl implements RoleService{
     RoleMapper roleMapper;
     @Autowired
     AdminMapper adminMapper;
+    @Autowired
+    AllPermissionsMapper allPermissionsMapper;
 
     @Override
     public List<RoleOptionsData> queryOptions() {
@@ -78,6 +79,8 @@ public class RoleServiceImpl implements RoleService{
         requestRole.setDeleted(false);
         requestRole.setAddTime(date);
         requestRole.setUpdateTime(date);
+        List list = new ArrayList();
+        requestRole.setPermissions(list);
         int code = roleMapper.insertSelective(requestRole);
         if(code != 1){
             map.put("code", 502);
@@ -101,9 +104,7 @@ public class RoleServiceImpl implements RoleService{
             }
         }
         role.setUpdateTime(new Date());
-        RoleExample roleExample1 = new RoleExample();
-        roleExample1.createCriteria().andIdEqualTo(role.getId());
-        int update = roleMapper.updateByExampleSelective(role, roleExample1);
+        int update = roleMapper.updateByPrimaryKey(role);
         if(update != 1){
             return 500;
         }
@@ -123,13 +124,79 @@ public class RoleServiceImpl implements RoleService{
             }
         }
         //确保管理员没有使用到该角色，就可以逻辑删除
-        RoleExample roleExample = new RoleExample();
-        roleExample.createCriteria().andIdEqualTo(role.getId());
         role.setUpdateTime(new Date());
         role.setDeleted(true);
-        int code = roleMapper.updateByExampleSelective(role, roleExample);
+        int code = roleMapper.updateByPrimaryKey(role);
         if(code != 1){
             return 501;
+        }
+        return 200;
+    }
+
+    @Override
+    public Map roleGetPermissions(int roleId) {
+        //显示所有的systemPermissions
+        AllPermissionsExample allPermissionsExampleL1 = new AllPermissionsExample();
+        allPermissionsExampleL1.createCriteria().andPidEqualTo(0);
+        List<AllPermissions> level1Permissions = allPermissionsMapper.selectByExample(allPermissionsExampleL1);
+        for (int i = 0; i < level1Permissions.size(); i++) {
+            int level1PrimaryId = level1Permissions.get(i).getPrimaryId();
+            AllPermissionsExample allPermissionsExampleL2 = new AllPermissionsExample();
+            allPermissionsExampleL2.createCriteria().andPidEqualTo(level1PrimaryId);
+            List<AllPermissions> level2Permissions = allPermissionsMapper.selectByExample(allPermissionsExampleL2);
+            for (int j = 0; j < level2Permissions.size(); j++) {
+                int level2PrimaryId = level2Permissions.get(j).getPrimaryId();
+                AllPermissionsExample allPermissionsExampleL3 = new AllPermissionsExample();
+                allPermissionsExampleL3.createCriteria().andPidEqualTo(level2PrimaryId);
+                List<AllPermissions> level3Permissions = allPermissionsMapper.selectByExample(allPermissionsExampleL3);
+                level2Permissions.get(j).setChildren(level3Permissions);
+            }
+            level1Permissions.get(i).setChildren(level2Permissions);
+        }
+        Map map = new HashMap();
+
+        map.put("systemPermissions", level1Permissions);
+        //通过roleId取出所有的permissions的primaryId
+        Role role = roleMapper.selectByPrimaryKey(roleId);
+        List assignedPermissionsIds = role.getPermissions();
+        //通过primaryId查出所有的permission
+        //没有权限返回空
+        if(assignedPermissionsIds.size() == 0){
+            map.put("assignedPermissions", null);
+            return map;
+        }
+        //有权限进行查询,有哪些权限
+        AllPermissionsExample allPermissionsExample = new AllPermissionsExample();
+        allPermissionsExample.createCriteria().andPrimaryIdIn(assignedPermissionsIds);
+        List<AllPermissions> allPermissions = allPermissionsMapper.selectByExample(allPermissionsExample);
+        List assignedPermissions = new ArrayList();
+        for (int i = 0; i < allPermissions.size(); i++) {
+            assignedPermissions.add(allPermissions.get(i).getId());
+        }
+        map.put("assignedPermissions", assignedPermissions);
+        return map;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int rolePostPermissions(PostPermissionReqVo postPermissionReqVo) {
+        List permissionsList = new ArrayList();
+        if(postPermissionReqVo.getPermissions().length != 0){
+            //查出所有的permissions的primaryId
+            AllPermissionsExample allPermissionsExample = new AllPermissionsExample();
+            allPermissionsExample.createCriteria().andIdIn(Arrays.asList(postPermissionReqVo.getPermissions()));
+            List<AllPermissions> allPermissions = allPermissionsMapper.selectByExample(allPermissionsExample);
+            for (int i = 0; i < allPermissions.size(); i++) {
+                permissionsList.add(allPermissions.get(i).getPrimaryId());
+            }
+        }
+        //更新数据
+        Role role = roleMapper.selectByPrimaryKey(postPermissionReqVo.getRoleId());
+        role.setUpdateTime(new Date());
+        role.setPermissions(permissionsList);
+        int code = roleMapper.updateByPrimaryKey(role);
+        if(code != 1){
+            return 502;
         }
         return 200;
     }

@@ -1,6 +1,7 @@
 package com.lxlt.controller.admin;
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Role;
+import com.lxlt.bean.rolebean.PostPermissionReqVo;
 import com.lxlt.bean.rolebean.RoleOptionsData;
 import com.lxlt.bean.rolebean.RolePermissionReqVo;
 import com.lxlt.bean.rolebean.RoleQueryBean;
@@ -117,6 +118,29 @@ public class RoleController {
     public BaseRespVo roleGetPermissions(RolePermissionReqVo reqVo){
         BaseRespVo baseRespVo = new BaseRespVo();
         int roleId = reqVo.getRoleId();
+        Map map = roleService.roleGetPermissions(roleId);
+        if(map == null){
+            baseRespVo.setErrno(502);
+            baseRespVo.setErrmsg("服务器内部错误");
+            return baseRespVo;
+        }
+        baseRespVo.setData(map);
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
+        return baseRespVo;
+    }
+
+    @RequestMapping(value = "permissions", method = RequestMethod.POST)
+    public BaseRespVo rolePostPermissions(@RequestBody PostPermissionReqVo postPermissionReqVo){
+        BaseRespVo baseRespVo = new BaseRespVo();
+        int code = roleService.rolePostPermissions(postPermissionReqVo);
+        if (code == 502) {
+            baseRespVo.setErrno(502);
+            baseRespVo.setErrmsg("服务器内部错误");
+            return baseRespVo;
+        }
+        baseRespVo.setErrno(0);
+        baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
 }

@@ -110,7 +110,7 @@
       #{enabled,jdbcType=BIT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT}, #{permissions,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Role">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.Role" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyanmall_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
