@@ -15,6 +15,11 @@ public interface GrouponRulesMapper {
 
     int insert(GrouponRules record);
 
+    /**
+     * 插入一条记录到数据库, 同时将id返回给record, 即mapper设置了useGeneratedKeys
+     * @param record
+     * @return
+     */
     int insertSelective(GrouponRules record);
 
     List<GrouponRules> selectByExample(GrouponRulesExample example);

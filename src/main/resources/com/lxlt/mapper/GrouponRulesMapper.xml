@@ -115,7 +115,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.GrouponRules">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.GrouponRules" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyanmall_groupon_rules
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

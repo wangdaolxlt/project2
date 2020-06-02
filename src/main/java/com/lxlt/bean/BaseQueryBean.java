@@ -7,7 +7,7 @@ import lombok.Data;
  * Date: 2020/5/30 10:23
  */
 @Data
-public class BaseQueryBean {
+public abstract class BaseQueryBean {
     /**
      * 排序字段
      */
