@@ -1,5 +1,7 @@
 package com.lxlt.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class System {
@@ -8,13 +10,22 @@ public class System {
     private String keyName;
 
     private String keyValue;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 
     private Date addTime;
+    @JsonFormat(pattern = "yyyy-MM--dd HH:mm:ss")
 
     private Date updateTime;
 
     private Boolean deleted;
 
+    public System(String keyName,String keyValue,Date addTime,Date updateTime,Boolean deleted){
+        this.keyName = keyName;
+        this.keyValue = keyValue;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
     public Integer getId() {
         return id;
     }

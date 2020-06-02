@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxlt.mapper.ConfigMapper">
+    <resultMap id="ConfigBeanMap" type="com.lxlt.bean.configbean.ConfigBean">
+        <collection property="beanKey" ofType="com.lxlt.bean.configbean.ConfigBeanKey">
+            <result property="beanKey" column="bean_key"/>
+        </collection>
+        <collection property="beanValue" ofType="com.lxlt.bean.configbean.ConfigBeanValue">
+            <result property="beanValue" column="bean_value"/>
+        </collection>
+    </resultMap>
+    <select id="getConfig" resultType="com.lxlt.bean.configbean.ConfigBean">
+select
+            s.key_name as bean_key,
+            s.key_value as bean_value
+        from
+            cskaoyanmall_system as s,
+            (
+                select
+                    key_name,
+                    max(update_time) as update_time
+                from
+                    (
+                        select
+                            key_name,
+                            update_time
+                        from
+                            cskaoyanmall_system
+                        where
+                            key_name like ${type}
+                        and
+                            deleted = false
+                    ) as d
+                group by
+                    key_name
+            ) as g
+        where
+            s.key_name = g.key_name
+        and
+            s.update_time = g.update_time;
+    </select>
+
+</mapper>
