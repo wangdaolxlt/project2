@@ -73,12 +73,29 @@
   <sql id="Base_Column_List">
     id, `name`, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
   </sql>
+  <sql id="Wx_Index_Column_List">
+    id, `name`, `desc`, pic_url, floor_price
+  </sql>
   <select id="selectByExample" parameterType="com.lxlt.bean.BrandExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
+    from cskaoyanmall_brand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectBrandByExampleToIndex" parameterType="com.lxlt.bean.BrandExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Wx_Index_Column_List" />
     from cskaoyanmall_brand
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

@@ -1,7 +1,9 @@
 package com.lxlt.mapper;
 
+import com.lxlt.bean.GrouponExample;
 import com.lxlt.bean.GrouponRules;
 import com.lxlt.bean.GrouponRulesExample;
+import com.lxlt.bean.wx.index.WxIndexGroupon;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,4 +35,6 @@ public interface GrouponRulesMapper {
     int updateByPrimaryKeySelective(GrouponRules record);
 
     int updateByPrimaryKey(GrouponRules record);
+
+    List<WxIndexGroupon> selectGrouponRulesByExampleToIndex(GrouponExample grouponExample);
 }

@@ -4,6 +4,7 @@ import com.lxlt.bean.Category;
 import com.lxlt.bean.CategoryExample;
 import com.lxlt.bean.CategoryL1Data;
 import com.lxlt.bean.CategoryListData;
+import com.lxlt.bean.wx.index.WxIndexFloorGoods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -42,4 +43,8 @@ public interface CategoryMapper {
     List<CategoryL1Data> selectCategoryByPid(@Param("pid") String levelOneId);
 
     int selectMinId();
+
+    List<Category> selectCategoryByExampleToIndex(CategoryExample categoryExample);
+
+    List<WxIndexFloorGoods> selectFloorGoodsByExampleToIndex(CategoryExample floorCategoryExample);
 }

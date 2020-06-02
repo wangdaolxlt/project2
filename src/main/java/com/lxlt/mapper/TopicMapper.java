@@ -35,4 +35,5 @@ public interface TopicMapper {
 
     int updateByPrimaryKey(Topic record);
 
+    List<Topic> selectTopicByExampleToIndex(TopicExample topicExample);
 }

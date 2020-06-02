@@ -35,4 +35,6 @@ public interface BrandMapper {
 
     @Select("select id as value, `name` as label from cskaoyanmall_brand")
     List<SimpleBrand> selectAllSimpleBrand();
+
+    List<Brand> selectBrandByExampleToIndex(BrandExample brandExample);
 }

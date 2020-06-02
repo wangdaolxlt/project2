@@ -1,4 +1,4 @@
-package com.lxlt.bean;
+package com.lxlt.bean.addressbean;
 
 import java.util.Date;
 

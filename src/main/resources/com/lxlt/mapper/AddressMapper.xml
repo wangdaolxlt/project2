@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lxlt.mapper.AddressMapper">
-  <resultMap id="BaseResultMap" type="com.lxlt.bean.Address">
+  <resultMap id="BaseResultMap" type="com.lxlt.bean.addressbean.Address">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -14,7 +14,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
-  </resultMap>
+</resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -107,7 +107,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lxlt.bean.Address">
+  <insert id="insert" parameterType="com.lxlt.bean.addressbean.Address">
     insert into cskaoyanmall_address (id, name, user_id,
       province_id, city_id, area_id,
       address, mobile, is_default,
@@ -119,7 +119,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Address">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.addressbean.Address">
     insert into cskaoyanmall_address
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -204,7 +204,53 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <!--<resultMap id="addressMapLeft" type="com.lxlt.bean.addressbean.Address">-->
+        <!--<result column="id" property="id"/>-->
+        <!--<result column="name" property="name"/>-->
+        <!--<result column="userId" property="userId"/>-->
+        <!--<result column="provinceId" property="provinceId"/>-->
+        <!--<result column="cityId" property="cityId"/>-->
+        <!--<result column="areaId" property="areaId"/>-->
+        <!--<result column="address" property="address"/>-->
+        <!--<result column="mobile" property="mobile"/>-->
+        <!--<result column="isDefault" property="isDefault"/>-->
+        <!--<result column="addTime" property="addTime"/>-->
+        <!--<result column="updateTime" property="updateTime"/>-->
+        <!--<result column="deleted" property="deleted"/>-->
+
+        <!--<association property="provinceId"  javaType="com.lxlt.bean.Region">-->
+            <!--<result column="provinceId" property="id"/>-->
+            <!--<result column="provinceName" property="name"/>-->
+        <!--</association>-->
+        <!--<association property="cityId"  javaType="com.lxlt.bean.Region">-->
+            <!--<result column="cityId" property="id"/>-->
+            <!--<result column="cityName" property="name"/>-->
+        <!--</association>-->
+        <!--<association property="areaId"  javaType="com.lxlt.bean.Region">-->
+            <!--<result column="areaId" property="id"/>-->
+            <!--<result column="areaName" property="name"/>-->
+        <!--</association>-->
+    <!--</resultMap>-->
+    <!--<select id="selectWxAddressList" resultMap="addressMapLeft">-->
+        <!--select a.is_default as isDefault,-->
+        <!--re.provinceName+re.cityName+re.areaName+a.address as detailedAddress,-->
+        <!--a.name,-->
+        <!--a.mobile,-->
+        <!--a.id-->
+        <!--from cskaoyanmall_address a-->
+        <!--left join cskaoyanmall_region re-->
+        <!--on a.provinceId=re.id and a.cityId=re.id and a.areaId=re.id-->
+        <!--where a.deleted = 0-->
+    <!--</select>-->
+    <select id="selectWxAddressList" resultType="com.lxlt.bean.addressbean.WxAddressListBean">
+    select is_default as isDefault,address as detailedAddress,name,mobile,id from cskaoyanmall_address where deleted = 0
+</select>
+    <select id="selectWxDetailAddress" resultType="com.lxlt.bean.addressbean.WxAddressDetailBean">
+      select is_default as isDefault,area_id as areaId,address,name,mobile,id,
+      city_id as cityId,province_id as provinceId from cskaoyanmall_address
+      where id = #{id}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_address
     <set>
       <if test="record.id != null">
@@ -266,7 +312,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lxlt.bean.Address">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxlt.bean.addressbean.Address">
     update cskaoyanmall_address
     <set>
       <if test="name != null">
@@ -305,7 +351,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.Address">
+  <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.addressbean.Address">
     update cskaoyanmall_address
     set name = #{name,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},

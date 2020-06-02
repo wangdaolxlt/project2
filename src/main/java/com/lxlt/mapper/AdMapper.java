@@ -2,6 +2,7 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.Ad;
 import com.lxlt.bean.AdExample;
+import com.lxlt.bean.wx.index.WxIndexGroupon;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface AdMapper {
     int updateByPrimaryKeySelective(Ad record);
 
     int updateByPrimaryKey(Ad record);
+
+    List<WxIndexGroupon> selectAdByExampleToIndex(AdExample adExample);
+
 }

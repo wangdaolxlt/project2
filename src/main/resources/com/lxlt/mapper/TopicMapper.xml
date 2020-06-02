@@ -79,6 +79,9 @@
     id, title, subtitle, price, read_count, pic_url, sort_order, goods, add_time, update_time,
     deleted
   </sql>
+  <sql id="Wx_Index_Column_List">
+    id, title, subtitle, price, read_count, pic_url
+  </sql>
   <sql id="Blob_Column_List">
     content
   </sql>
@@ -104,6 +107,20 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
+    from cskaoyanmall_topic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectTopicByExampleToIndex" parameterType="com.lxlt.bean.TopicExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Wx_Index_Column_List" />
     from cskaoyanmall_topic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

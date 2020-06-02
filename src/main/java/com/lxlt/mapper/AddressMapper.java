@@ -1,7 +1,9 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Address;
+import com.lxlt.bean.addressbean.Address;
 import com.lxlt.bean.AddressExample;
+import com.lxlt.bean.addressbean.WxAddressDetailBean;
+import com.lxlt.bean.addressbean.WxAddressListBean;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +30,8 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address record);
 
     int updateByPrimaryKey(Address record);
+
+    List<WxAddressListBean> selectWxAddressList();
+
+    WxAddressDetailBean selectWxDetailAddress(Integer id);
 }

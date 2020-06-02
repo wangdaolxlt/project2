@@ -77,12 +77,31 @@
     id, name, link, url, position, content, start_time, end_time, enabled, add_time,
     update_time, deleted
   </sql>
+  <sql id="Wx_Index_Column_List">
+    id, `name`, link, url, `position`, content, enabled, add_time,
+    update_time, deleted
+  </sql>
   <select id="selectByExample" parameterType="com.lxlt.bean.AdExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
+    from cskaoyanmall_ad
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectAdByExampleToIndex" parameterType="com.lxlt.bean.AdExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Wx_Index_Column_List" />
     from cskaoyanmall_ad
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -205,7 +224,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_ad
     <set>
       <if test="record.id != null">
