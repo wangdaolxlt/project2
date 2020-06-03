@@ -113,7 +113,7 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         if (wxGoodsListQueryBean.getCategoryId() != null){
             criteria.andCategoryIdEqualTo(wxGoodsListQueryBean.getCategoryId());
         }
-        if(wxGoodsListQueryBean.getCategoryId() != null){
+        if(wxGoodsListQueryBean.getBrandId() != null){
             criteria.andBrandIdEqualTo(wxGoodsListQueryBean.getBrandId());
         }
         if(wxGoodsListQueryBean.getKeyword() != null){
