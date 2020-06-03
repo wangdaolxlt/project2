@@ -1,8 +1,10 @@
 package com.lxlt.service.wxgoodsservice;
 
+import com.lxlt.bean.Goods;
 import com.lxlt.bean.goodsbean.GoodsDetailBean;
 import com.lxlt.bean.goodsbean.QueryGoodsBean;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,7 +38,14 @@ public interface WxGoodsService {
     /**
      * 获得商品详情
      * @return
-     * @param id
+     * @param goodsId
      */
-    Map<String, Object> goodsDetail(Integer id);
+    Map<String, Object> goodsDetail(Integer goodsId);
+
+    /**
+     * 查询与goodsId相关的商品, 同一个Category中的商品
+     * @param goodsId 商品id
+     * @return
+     */
+    Map<String, Object> related(Integer goodsId);
 }
