@@ -11,7 +11,9 @@ import com.lxlt.mapper.FootprintMapper;
 import com.lxlt.mapper.GoodsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,5 +42,18 @@ public class WxFootprintServiceImpl implements WxFootprintService{
     public Integer deleteFootprint(Integer id) {
         int i = footprintMapper.deleteByPrimaryKey(id);
         return i;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void insertFootPrint(Integer userId, Integer goodsId) {
+        Footprint footprint = new Footprint();
+        footprint.setUserId(userId);
+        footprint.setGoodsId(goodsId);
+        footprint.setAddTime(new Date());
+        footprint.setUpdateTime(footprint.getAddTime());
+        footprint.setDeleted(false);
+        footprintMapper.insert(footprint);
+
     }
 }

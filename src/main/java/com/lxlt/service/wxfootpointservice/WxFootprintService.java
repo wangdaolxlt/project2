@@ -6,4 +6,6 @@ public interface WxFootprintService {
     Map<String, Object> queryFootprint(Integer page, Integer size);
 
     Integer deleteFootprint(Integer id);
+
+    void insertFootPrint(Integer userId, Integer goodsId);
 }

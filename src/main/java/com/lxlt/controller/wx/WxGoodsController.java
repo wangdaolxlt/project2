@@ -2,6 +2,7 @@ package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.wxgoodsbean.WxGoodsListQueryBean;
+import com.lxlt.service.wxfootpointservice.WxFootprintService;
 import com.lxlt.service.wxgoodsservice.WxGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,8 @@ public class WxGoodsController {
 
     @Autowired
     WxGoodsService wxGoodsService;
+    @Autowired
+    WxFootprintService wxFootprintService;
 
     @RequestMapping("count")
     public BaseRespVo count(){
@@ -81,6 +84,8 @@ public class WxGoodsController {
             return baseRespVo;
         }
         // 访问商品成功, 浏览记录进行添加
+        int userId = 1;
+        wxFootprintService.insertFootPrint(userId, id);
 
 
         baseRespVo.setData(dataMap);
