@@ -180,7 +180,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectByKeyword" parameterType="com.lxlt.bean.keywordbean.KeywordExample" resultType="java.lang.String">
+      select keyword from  cskaoyanmall_keyword
+      <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+      </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_keyword
     <set>
       <if test="record.id != null">

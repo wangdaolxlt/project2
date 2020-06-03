@@ -1,10 +1,7 @@
 package com.lxlt.service.wxgoodsservice;
 
-import com.lxlt.bean.Goods;
-import com.lxlt.bean.goodsbean.GoodsDetailBean;
-import com.lxlt.bean.goodsbean.QueryGoodsBean;
+import com.lxlt.bean.wxgoodsbean.WxGoodsListQueryBean;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,13 +24,10 @@ public interface WxGoodsService {
     Map<String, Object> queryCategoryForWx(Integer id);
 
     /**
-     * 查询当前分类的商品
-     * @param categoryId 当前分类
-     * @param page 当前页数
-     * @param size 每页数据显示内容
+     * 查询当前分类或当前品牌的商品
      * @return
      */
-    Map<String, Object> list(Integer categoryId, Integer page, Integer size);
+    Map<String, Object> list(WxGoodsListQueryBean wxGoodsListQueryBean);
 
     /**
      * 获得商品详情

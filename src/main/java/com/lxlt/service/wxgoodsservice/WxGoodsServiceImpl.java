@@ -7,6 +7,7 @@ import com.lxlt.bean.brandbean.Brand;
 import com.lxlt.bean.issuebean.Issue;
 import com.lxlt.bean.issuebean.IssueExample;
 import com.lxlt.bean.wxgoodsbean.WxGoodsDetailBean;
+import com.lxlt.bean.wxgoodsbean.WxGoodsListQueryBean;
 import com.lxlt.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,18 +100,34 @@ public class WxGoodsServiceImpl implements WxGoodsService {
     }
 
     /**
-     * 查询当前分类的商品
-     *
-     * @param categoryId 当前分类
-     * @param page       当前页数
-     * @param size       每页数据显示内容
+     * 查询当前分类或当前品牌的商品
      * @return
      */
     @Override
-    public Map<String, Object> list(Integer categoryId, Integer page, Integer size) {
-        PageHelper.startPage(page, size);
+    public Map<String, Object> list(WxGoodsListQueryBean wxGoodsListQueryBean) {
+        Integer page = wxGoodsListQueryBean.getPage();
+        Integer size = wxGoodsListQueryBean.getSize();
+        // PageHelper.startPage(page, size);
         GoodsExample goodsExample = new GoodsExample();
-        goodsExample.createCriteria().andDeletedEqualTo(false).andCategoryIdEqualTo(categoryId);
+        GoodsExample.Criteria criteria = goodsExample.createCriteria().andDeletedEqualTo(false);
+        if(wxGoodsListQueryBean.getIsHot() != null){
+            criteria.andIsHotEqualTo(true);
+        }
+        if(wxGoodsListQueryBean.getIsNew() != null){
+            criteria.andIsNewEqualTo(true);
+        }
+        if (wxGoodsListQueryBean.getCategoryId() != null && wxGoodsListQueryBean.getCategoryId() != 0){
+            criteria.andCategoryIdEqualTo(wxGoodsListQueryBean.getCategoryId());
+        }
+        if(wxGoodsListQueryBean.getBrandId() != null){
+            criteria.andBrandIdEqualTo(wxGoodsListQueryBean.getBrandId());
+        }
+        if(wxGoodsListQueryBean.getKeyword() != null){
+            criteria.andKeywordsLike("%" + wxGoodsListQueryBean.getKeyword() +"%");
+        }
+        if(wxGoodsListQueryBean.getSort() != null && wxGoodsListQueryBean.getOrder() != null){
+            goodsExample.setOrderByClause(wxGoodsListQueryBean.getSort() + " " + wxGoodsListQueryBean.getOrder());
+        }
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         PageInfo<Goods> goodsPageInfo = new PageInfo<>(goodsList);
         long count = goodsPageInfo.getTotal();

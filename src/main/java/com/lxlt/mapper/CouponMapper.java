@@ -1,6 +1,6 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.Coupon;
+import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.CouponExample;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +30,6 @@ public interface CouponMapper {
     int updateByPrimaryKey(Coupon record);
 
     List<Coupon> selectCouponByExampleToIndex(CouponExample example);
+
+    Coupon selectByCode(String code);
 }

@@ -1,6 +1,6 @@
 package com.lxlt.mapper;
 
-import com.lxlt.bean.CouponUser;
+import com.lxlt.bean.couponbean.CouponUser;
 import com.lxlt.bean.CouponUserExample;
 import org.apache.ibatis.annotations.Param;
 

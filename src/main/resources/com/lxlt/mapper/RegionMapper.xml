@@ -148,8 +148,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+    <select id="selectByPid" resultType="com.lxlt.bean.Region">
+      select id,pid,name,`type`,code from cskaoyanmall_region where pid = #{pid}
+    </select>
 
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_region
     <set>
       <if test="record.id != null">

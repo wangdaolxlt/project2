@@ -1,8 +1,6 @@
 package com.lxlt.service.addressservice;
 
-import com.lxlt.bean.addressbean.AddressReq;
-import com.lxlt.bean.addressbean.WxAddressDetailBean;
-import com.lxlt.bean.addressbean.WxAddressListBean;
+import com.lxlt.bean.addressbean.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,4 +21,17 @@ public interface AddressService {
     List<WxAddressListBean> queryWxAllAddresses();
 
     WxAddressDetailBean queryWxDetailAddress(Integer id);
+
+    String queryProvinceById(Integer provinceId);
+
+    String queryCityById(Integer cityId);
+
+    String queryAreaById(Integer areaId);
+
+
+    void updateWxAddress(Address address);
+
+    Integer insertWxAddress(Address address);
+
+    Integer deleteWxAddressById(Integer id);
 }

@@ -2,12 +2,10 @@ package com.lxlt.service.addressservice;
 
 
 import com.github.pagehelper.PageHelper;
-import com.lxlt.bean.addressbean.Address;
+import com.lxlt.bean.addressbean.*;
 import com.lxlt.bean.AddressExample;
-import com.lxlt.bean.addressbean.AddressReq;
-import com.lxlt.bean.addressbean.WxAddressDetailBean;
-import com.lxlt.bean.addressbean.WxAddressListBean;
 import com.lxlt.mapper.AddressMapper;
+import com.lxlt.mapper.RegionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +27,9 @@ public class AddressServiceImpl implements AddressService {
 
     @Autowired
     AddressMapper addressMapper;
+
+    @Autowired
+    RegionMapper regionMapper;
 
     @Override
     public HashMap<String, Object> queryAllAddresses(AddressReq addressReq) {
@@ -54,4 +55,36 @@ public class AddressServiceImpl implements AddressService {
     public WxAddressDetailBean queryWxDetailAddress(Integer id) {
         return addressMapper.selectWxDetailAddress(id);
     }
+
+    @Override
+    public String queryProvinceById(Integer provinceId) {
+        return regionMapper.selectByPrimaryKey(provinceId).getName();
+    }
+
+    @Override
+    public String queryCityById(Integer cityId) {
+        return regionMapper.selectByPrimaryKey(cityId).getName();
+    }
+
+    @Override
+    public String queryAreaById(Integer areaId) {
+        return regionMapper.selectByPrimaryKey(areaId).getName();
+    }
+
+    @Override
+    public void updateWxAddress(Address address) {
+        addressMapper.updateByPrimaryKeySelective(address);
+    }
+
+    @Override
+    public Integer insertWxAddress(Address address) {
+        return addressMapper.insertSelective(address);
+    }
+
+    @Override
+    public Integer deleteWxAddressById(Integer id) {
+        return addressMapper.deleteAddressById(id);
+    }
+
+
 }

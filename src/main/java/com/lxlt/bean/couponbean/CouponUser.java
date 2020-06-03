@@ -1,4 +1,4 @@
-package com.lxlt.bean;
+package com.lxlt.bean.couponbean;
 
 import java.util.Date;
 

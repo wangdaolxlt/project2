@@ -164,7 +164,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <select id="selectByKeyword" parameterType="com.lxlt.bean.SearchHistoryExample" resultType="com.lxlt.bean.keywordbean.Keyword">
+    select keyword from cskaoyanmall_search_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_search_history
     <set>
       <if test="record.id != null">

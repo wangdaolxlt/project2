@@ -3,6 +3,7 @@ package com.lxlt.service.wxindexservice;
 import com.github.pagehelper.PageHelper;
 import com.lxlt.bean.*;
 import com.lxlt.bean.brandbean.Brand;
+import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.wx.index.WxIndexFloorGoods;
 import com.lxlt.bean.wx.index.WxIndexGroupon;
 import com.lxlt.mapper.*;

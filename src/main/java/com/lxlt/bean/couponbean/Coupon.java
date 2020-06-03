@@ -1,4 +1,4 @@
-package com.lxlt.bean;
+package com.lxlt.bean.couponbean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

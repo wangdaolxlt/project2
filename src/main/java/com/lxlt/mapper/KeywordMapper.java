@@ -30,4 +30,6 @@ public interface KeywordMapper {
     int updateByPrimaryKeySelective(Keyword record);
 
     int updateByPrimaryKey(Keyword record);
+
+    List<String> selectByKeyword(KeywordExample keywordExample);
 }

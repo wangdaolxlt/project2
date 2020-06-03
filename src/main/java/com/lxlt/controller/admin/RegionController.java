@@ -27,7 +27,6 @@ public class RegionController {
         regionBaseRespVo.setErrmsg("成功");
         List<Region> allRegion = regionService.queryAllRegionAndCategorize();
         regionBaseRespVo.setData(allRegion);
-
         return regionBaseRespVo;
     }
 }

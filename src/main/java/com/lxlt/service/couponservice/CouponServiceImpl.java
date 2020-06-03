@@ -1,8 +1,13 @@
 package com.lxlt.service.couponservice;
 
-import com.lxlt.bean.Coupon;
+import com.github.pagehelper.PageHelper;
+import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.CouponExample;
+import com.lxlt.bean.couponbean.CouponReq;
+import com.lxlt.bean.couponbean.CouponUser;
 import com.lxlt.mapper.CouponMapper;
+import com.lxlt.mapper.CouponUserMapper;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +29,9 @@ public class CouponServiceImpl implements CouponService {
 
     @Autowired
     CouponMapper couponMapper;
+
+    @Autowired
+    CouponUserMapper couponUserMapper;
 
     @Override
     public HashMap<String, Object> queryAllCoupons() {
@@ -85,4 +93,57 @@ public class CouponServiceImpl implements CouponService {
         return hashMap;
     }
 
+    @Override
+    public HashMap<String, Object> queryWxAllCoupons(CouponReq couponReq) {
+        PageHelper.startPage(couponReq.getPage(), couponReq.getSize());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        CouponExample couponExample = new CouponExample();
+        couponExample.createCriteria().andIdGreaterThan(0);
+        List<Coupon> couponList = couponMapper.selectByExample(couponExample);
+        int couponCount = (int) couponMapper.countByExample(couponExample);
+        hashMap.put("data", couponList);
+        hashMap.put("count", couponCount);
+        return hashMap;
+    }
+
+    @Override
+    public HashMap<String, Object> queryWxAllMyCoupons(CouponReq couponReq) {
+        PageHelper.startPage(couponReq.getPage(), couponReq.getSize());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        CouponExample couponExample = new CouponExample();
+        couponExample.createCriteria().andIdGreaterThan(0).andStatusEqualTo(couponReq.getStatus());
+        List<Coupon> couponList = couponMapper.selectByExample(couponExample);
+        int couponCount = (int) couponMapper.countByExample(couponExample);
+        hashMap.put("data", couponList);
+        hashMap.put("count", couponCount);
+        return hashMap;
+    }
+
+    @Override
+    public HashMap<String, Object> queryWxselectCoupons(CouponReq couponReq) {
+        PageHelper.startPage(couponReq.getPage(), couponReq.getSize());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        CouponExample couponExample = new CouponExample();
+        couponExample.createCriteria().andIdGreaterThan(0);
+        List<Coupon> couponList = couponMapper.selectByExample(couponExample);
+        int couponCount = (int) couponMapper.countByExample(couponExample);
+        hashMap.put("data", couponList);
+        hashMap.put("count", couponCount);
+        return hashMap;
+    }
+
+    @Override
+    public Boolean insertWxCoupon(CouponUser couponUser) {
+        //int id = couponUserMapper.insertSelective(couponUser);
+        //couponUser.getId();
+        //System.out.println(id);
+        return null;
+    }
+
+    @Override
+    public void exchangeCouponByCode(String code) {
+        Coupon coupon = couponMapper.selectByCode(code);
+        //couponUserMapper.insertSelective(coupon);
+        return;
+    }
 }

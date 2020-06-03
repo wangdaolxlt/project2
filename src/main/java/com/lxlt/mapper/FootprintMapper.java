@@ -2,6 +2,7 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.Footprint;
 import com.lxlt.bean.FootprintExample;
+import com.lxlt.bean.wxfootprintbean.WxFootprint;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface FootprintMapper {
     int updateByPrimaryKeySelective(Footprint record);
 
     int updateByPrimaryKey(Footprint record);
+
+    List<WxFootprint> selectByWxExample();
 }

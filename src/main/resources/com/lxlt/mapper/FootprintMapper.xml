@@ -157,7 +157,14 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectByWxExample" resultType="com.lxlt.bean.wxfootprintbean.WxFootprint">
+      select f.id , f.goods_id as doogsId , f.add_time as addTime ,g.brief , g.pic_url as picUrl , g.name , g.retail_price as retailPrice
+      from cskaoyanmall_footprint  f
+      LEFT JOIN cskaoyanmall_goods g
+      ON f.goods_id = g.id
+      where f.deleted = 0
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_footprint
     <set>
       <if test="record.id != null">
