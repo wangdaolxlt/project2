@@ -1,7 +1,9 @@
 package com.lxlt.service.wxtopicservice;
 
+import com.lxlt.bean.Topic;
 import com.lxlt.bean.WxBaseQueryBean;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,4 +15,8 @@ import java.util.Map;
  */
 public interface WxTopicService {
     Map wxQueryTopic(WxBaseQueryBean queryBean);
+
+    Map wxTopicDetail(int id);
+
+    List<Topic> wxTopicRelated(int id);
 }

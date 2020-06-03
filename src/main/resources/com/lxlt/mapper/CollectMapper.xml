@@ -109,7 +109,7 @@
       #{type,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.Collect">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.Collect" useGeneratedKeys="true" keyProperty="id">
     insert into cskaoyanmall_collect
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

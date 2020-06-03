@@ -2,6 +2,8 @@ package com.lxlt.service.wxcartservice;
 
 import com.lxlt.bean.Cart;
 import com.lxlt.bean.cartbean.CartCheckedReqVo;
+import com.lxlt.bean.cartbean.CartCheckoutReqVo;
+import com.lxlt.bean.cartbean.CartCheckoutRespVo;
 
 import java.util.Map;
 
@@ -22,4 +24,11 @@ public interface WxCartService {
     int cartUpdate(Cart cart);
 
     Map cartDelete(String username, CartCheckedReqVo cartCheckedReqVo);
+
+    Map cartAdd(String username, Cart cart);
+
+    Map cartFastAdd(String username, Cart cart);
+
+
+    CartCheckoutRespVo checkout(String username, CartCheckoutReqVo cartCheckoutReqVo);
 }

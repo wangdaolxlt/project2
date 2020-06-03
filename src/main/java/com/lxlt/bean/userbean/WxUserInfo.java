@@ -1,6 +1,8 @@
 package com.lxlt.bean.userbean;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @PackgeName: com.lxlt.bean.userbean
@@ -10,6 +12,8 @@ import lombok.Data;
  * project name: project2
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WxUserInfo {
     private String nickname;
     private String avatarUrl;

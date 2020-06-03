@@ -43,7 +43,7 @@ public class StorageServiceImpl implements StorageService{
         //随机生成一个uuid
         String key = UUID.randomUUID().toString().replace("-","").toLowerCase();
         String originalFilename = file.getOriginalFilename();
-        int index = originalFilename.indexOf(".");
+        int index = originalFilename.lastIndexOf(".");
         String suffix = originalFilename.substring(index);
         //拼接生成新的文件名
         key = key + suffix;

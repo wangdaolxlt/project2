@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Topic {
     private Integer id;
@@ -20,7 +21,7 @@ public class Topic {
 
     private Integer sortOrder;
 
-    private String[] goods;
+    private List goods;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date addTime;
@@ -88,11 +89,11 @@ public class Topic {
         this.sortOrder = sortOrder;
     }
 
-    public String[] getGoods() {
+    public List getGoods() {
         return goods;
     }
 
-    public void setGoods(String[] goods) {
+    public void setGoods(List goods) {
         this.goods = goods;
     }
 

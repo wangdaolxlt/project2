@@ -1,12 +1,14 @@
 package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
+import com.lxlt.bean.Topic;
 import com.lxlt.bean.WxBaseQueryBean;
 import com.lxlt.service.wxtopicservice.WxTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,15 +45,29 @@ public class WxTopicController {
     }
 
     @RequestMapping("detail")
-    public BaseRespVo wxTopicDetail(){
+    public BaseRespVo wxTopicDetail(Topic topic){
         BaseRespVo baseRespVo = new BaseRespVo();
-
+        int id = topic.getId();
+        Map map = wxTopicService.wxTopicDetail(id);
+        if(map == null){
+            baseRespVo.setErrmsg("服务器内部错误");
+            baseRespVo.setErrno(502);
+            return baseRespVo;
+        }
+        baseRespVo.setErrno(0);
+        baseRespVo.setData(map);
+        baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
 
     @RequestMapping("related")
-    public BaseRespVo wxTopicRelated(){
+    public BaseRespVo wxTopicRelated(Topic topic){
         BaseRespVo baseRespVo = new BaseRespVo();
+        int id = topic.getId();
+        List<Topic> list = wxTopicService.wxTopicRelated(id);
+        baseRespVo.setErrno(0);
+        baseRespVo.setData(list);
+        baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
 }
