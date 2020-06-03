@@ -7,7 +7,7 @@ import com.lxlt.bean.brandbean.Brand;
 import com.lxlt.bean.issuebean.Issue;
 import com.lxlt.bean.issuebean.IssueExample;
 import com.lxlt.bean.wxgoodsbean.WxGoodsDetailBean;
-import com.lxlt.bean.wxgoodsbean.WxGoodsListBean;
+import com.lxlt.bean.wxgoodsbean.WxGoodsListQueryBean;
 import com.lxlt.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,16 +104,23 @@ public class WxGoodsServiceImpl implements WxGoodsService {
      * @return
      */
     @Override
-    public Map<String, Object> list(WxGoodsListBean wxGoodsListBean) {
-        Integer page = wxGoodsListBean.getPage();
-        Integer size = wxGoodsListBean.getSize();
+    public Map<String, Object> list(WxGoodsListQueryBean wxGoodsListQueryBean) {
+        Integer page = wxGoodsListQueryBean.getPage();
+        Integer size = wxGoodsListQueryBean.getSize();
         PageHelper.startPage(page, size);
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria().andDeletedEqualTo(false);
-        if (wxGoodsListBean.getCategoryId() != null){
-            criteria.andCategoryIdEqualTo(wxGoodsListBean.getCategoryId());
-        } else {
-            criteria.andBrandIdEqualTo(wxGoodsListBean.getBrandId());
+        if (wxGoodsListQueryBean.getCategoryId() != null){
+            criteria.andCategoryIdEqualTo(wxGoodsListQueryBean.getCategoryId());
+        }
+        if(wxGoodsListQueryBean.getCategoryId() != null){
+            criteria.andBrandIdEqualTo(wxGoodsListQueryBean.getBrandId());
+        }
+        if(wxGoodsListQueryBean.getKeyword() != null){
+            criteria.andKeywordsLike("%" + wxGoodsListQueryBean.getKeyword() +"%");
+        }
+        if(wxGoodsListQueryBean.getSort() != null && wxGoodsListQueryBean.getOrder() != null){
+            goodsExample.setOrderByClause(wxGoodsListQueryBean.getSort() + " " + wxGoodsListQueryBean.getOrder());
         }
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         PageInfo<Goods> goodsPageInfo = new PageInfo<>(goodsList);

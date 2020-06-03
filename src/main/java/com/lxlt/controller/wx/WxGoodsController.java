@@ -1,14 +1,12 @@
 package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
-import com.lxlt.bean.Goods;
-import com.lxlt.bean.wxgoodsbean.WxGoodsListBean;
+import com.lxlt.bean.wxgoodsbean.WxGoodsListQueryBean;
 import com.lxlt.service.wxgoodsservice.WxGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,9 +55,9 @@ public class WxGoodsController {
 
     @RequestMapping("list")
     // public BaseRespVo list(Integer categoryId, Integer page, Integer size){
-    public BaseRespVo list(WxGoodsListBean wxGoodsListBean){
+    public BaseRespVo list(WxGoodsListQueryBean wxGoodsListQueryBean){
         BaseRespVo<Map<String, Object>> baseRespVo = new BaseRespVo<>();
-        Map<String, Object> dataMap = wxGoodsService.list(wxGoodsListBean);
+        Map<String, Object> dataMap = wxGoodsService.list(wxGoodsListQueryBean);
         if (dataMap == null) {
             baseRespVo.setErrmsg("服务器内部错误");
             baseRespVo.setErrno(500);

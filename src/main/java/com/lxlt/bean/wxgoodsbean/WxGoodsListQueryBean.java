@@ -10,9 +10,9 @@ import lombok.Data;
  * 前台用于查询goods的bean
  */
 @Data
-public class WxGoodsListBean extends BaseQueryBean {
+public class WxGoodsListQueryBean extends BaseQueryBean {
     Integer categoryId;
     Integer brandId;
-    Integer page;
+    String keyword;
     Integer size;
 }
