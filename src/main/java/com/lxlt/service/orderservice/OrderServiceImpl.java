@@ -53,8 +53,8 @@ public class OrderServiceImpl implements OrderService {
             criteria.andOrderSnLike("%" + orderQuery.getOrderSn() + "%");
         }
         //如果订单状态查询
-        if (orderQuery.getOrderStatus() != null) {
-            criteria.andOrderStatusEqualTo(orderQuery.getOrderStatus());
+        if (orderQuery.getOrderStatusArray() != null && orderQuery.getOrderStatusArray().size() > 0) {
+            criteria.andOrderStatusIn(orderQuery.getOrderStatusArray());
         }
         //排序
         criteria.andDeletedEqualTo(false);

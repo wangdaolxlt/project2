@@ -2,9 +2,11 @@ package com.lxlt.mapper;
 
 import com.lxlt.bean.SearchHistory;
 import com.lxlt.bean.SearchHistoryExample;
+import com.lxlt.bean.keywordbean.Keyword;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SearchHistoryMapper {
     long countByExample(SearchHistoryExample example);
@@ -28,4 +30,6 @@ public interface SearchHistoryMapper {
     int updateByPrimaryKeySelective(SearchHistory record);
 
     int updateByPrimaryKey(SearchHistory record);
+
+    List<Keyword> selectByKeyword(SearchHistoryExample searchHistoryExample);
 }

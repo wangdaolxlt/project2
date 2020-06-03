@@ -48,7 +48,8 @@ public class IndexServiceImpl implements IndexService {
 
         // 查询 优惠券
         CouponExample couponExample = new CouponExample();
-        couponExample.createCriteria().andDeletedEqualTo(false);
+        // 未删除 可正常使用 用户领取
+        couponExample.createCriteria().andDeletedEqualTo(false).andStatusEqualTo((short) 0).andTypeEqualTo((short) 0);
         List<Coupon> couponList = couponMapper.selectCouponByExampleToIndex(couponExample);
         dataMap.put("couponList", couponList);
 
@@ -62,7 +63,6 @@ public class IndexServiceImpl implements IndexService {
         GrouponExample grouponExample = new GrouponExample();
         grouponExample.createCriteria().andDeletedEqualTo(false);
         List<WxIndexGroupon> grouponList = grouponRulesMapper.selectGrouponRulesByExampleToIndex(grouponExample);
-        // TODO: 2020/6/2 查询goods信息
         for (WxIndexGroupon wxIndexGroupon : grouponList) {
             Integer goodsId = wxIndexGroupon.getGoods().getId();
             GoodsExample grouponGoodsExample = new GoodsExample();

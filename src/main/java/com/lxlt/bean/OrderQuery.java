@@ -2,6 +2,8 @@ package com.lxlt.bean;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author lenovo
  * @PackgeName: OrderQuery
@@ -16,7 +18,7 @@ public class OrderQuery {
 
     private String orderSn;
 
-    private Short orderStatus;
+    private List<Short> orderStatusArray;
     private String  sort;
     private String order;
 }

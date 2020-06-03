@@ -55,9 +55,4 @@ public interface GoodsService {
      */
     int update(GoodsDetailBean goodsDetailBean);
 
-    /**
-     * 查询goods的数量
-     * @return
-     */
-    Long goodsCount();
 }
