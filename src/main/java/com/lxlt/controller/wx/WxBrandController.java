@@ -19,8 +19,8 @@ import java.util.Map;
 @RequestMapping("wx/brand")
 public class WxBrandController {
 
-    @Autowired
-    WxBrandService wxBrandService;
+    // @Autowired
+    // WxBrandService wxBrandService;
 
 
     @RequestMapping("brand")
