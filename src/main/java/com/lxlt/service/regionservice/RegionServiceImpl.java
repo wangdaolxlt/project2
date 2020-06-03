@@ -43,5 +43,10 @@ public class  RegionServiceImpl implements RegionService {
         return allRegion;
     }
 
+    @Override
+    public List<Region> queryAllRegionByPid(Integer pid) {
+        return regionMapper.selectByPid(pid);
+    }
+
 
 }

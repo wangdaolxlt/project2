@@ -1,7 +1,9 @@
 package com.lxlt.service.userservice;
 
+import com.lxlt.bean.OrderExample;
 import com.lxlt.bean.User;
 import com.lxlt.bean.UserExample;
+import com.lxlt.mapper.OrderMapper;
 import com.lxlt.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    OrderMapper orderMapper;
+
     @Override
     public HashMap<String, Object> queryAllUsers() {
         UserExample userExample = new UserExample();
@@ -36,5 +41,12 @@ public class UserServiceImpl implements UserService {
         hashMap.put("items", userList);
         hashMap.put("total", usersNum);
         return hashMap;
+    }
+
+    @Override
+    public List<String> queryAllOrders() {
+        OrderExample orderExample = new OrderExample();
+        //orderExample.createCriteria()
+        return null;
     }
 }

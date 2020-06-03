@@ -1,6 +1,8 @@
 package com.lxlt.service.couponservice;
 
-import com.lxlt.bean.Coupon;
+import com.lxlt.bean.couponbean.Coupon;
+import com.lxlt.bean.couponbean.CouponReq;
+import com.lxlt.bean.couponbean.CouponUser;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,4 +29,14 @@ public interface CouponService {
     Integer deleteCoupon(Coupon coupon);
 
     HashMap<String, Object> listuserCoupon();
+
+    HashMap<String, Object> queryWxAllCoupons(CouponReq couponReq);
+
+    HashMap<String, Object> queryWxAllMyCoupons(CouponReq couponReq);
+
+    HashMap<String, Object> queryWxselectCoupons(CouponReq couponReq);
+
+    Boolean insertWxCoupon(CouponUser couponUser);
+
+    void exchangeCouponByCode(String code);
 }

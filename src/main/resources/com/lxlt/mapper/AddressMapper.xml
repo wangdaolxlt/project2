@@ -107,7 +107,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lxlt.bean.addressbean.Address">
+    <delete id="deleteAddressById">
+        update cskaoyanmall_address set deleted = 1 where id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.lxlt.bean.addressbean.Address">
     insert into cskaoyanmall_address (id, name, user_id,
       province_id, city_id, area_id,
       address, mobile, is_default,

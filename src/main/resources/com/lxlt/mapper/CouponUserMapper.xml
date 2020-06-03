@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lxlt.mapper.CouponUserMapper">
-  <resultMap id="BaseResultMap" type="com.lxlt.bean.CouponUser">
+  <resultMap id="BaseResultMap" type="com.lxlt.bean.couponbean.CouponUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="coupon_id" jdbcType="INTEGER" property="couponId" />
@@ -106,7 +106,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lxlt.bean.CouponUser">
+  <insert id="insert" parameterType="com.lxlt.bean.couponbean.CouponUser">
     insert into cskaoyanmall_coupon_user (id, user_id, coupon_id,
       status, used_time, start_time,
       end_time, order_id, add_time,
@@ -116,7 +116,7 @@
       #{endTime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxlt.bean.CouponUser">
+  <insert id="insertSelective" parameterType="com.lxlt.bean.couponbean.CouponUser">
     insert into cskaoyanmall_coupon_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -253,7 +253,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lxlt.bean.CouponUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxlt.bean.couponbean.CouponUser">
     update cskaoyanmall_coupon_user
     <set>
       <if test="userId != null">
@@ -289,7 +289,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.CouponUser">
+  <update id="updateByPrimaryKey" parameterType="com.lxlt.bean.couponbean.CouponUser">
     update cskaoyanmall_coupon_user
     set user_id = #{userId,jdbcType=INTEGER},
       coupon_id = #{couponId,jdbcType=INTEGER},

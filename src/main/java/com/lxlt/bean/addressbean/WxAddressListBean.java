@@ -23,5 +23,6 @@ public class WxAddressListBean {
         private String name;
         private String mobile;
         private Integer id;
+        private Integer pid;
 
 }

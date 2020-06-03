@@ -34,4 +34,6 @@ public interface AddressMapper {
     List<WxAddressListBean> selectWxAddressList();
 
     WxAddressDetailBean selectWxDetailAddress(Integer id);
+
+    Integer deleteAddressById(Integer id);
 }

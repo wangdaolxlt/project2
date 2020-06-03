@@ -29,5 +29,7 @@ public interface RegionMapper {
 
     int updateByPrimaryKey(Region record);
 
+    List<Region> selectByPid(Integer pid);
+
 //    List<Region> queryAllRegionAndCategorize();
 }

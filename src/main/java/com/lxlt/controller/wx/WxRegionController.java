@@ -1,4 +1,4 @@
-package com.lxlt.controller.admin;
+package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Region;
@@ -10,22 +10,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @Author: Lucas_Alison
- * Date: 2020/5/28 17:37
+ * @PackgeName: com.lxlt.controller.wx
+ * @ClassName: WxRegionController
+ * @Author: Pipboy
+ * project name: project2
+ * @Version:
+ * @Description:
  */
 @RestController
-@RequestMapping("admin/region")
-public class RegionController {
+@RequestMapping("wx/region")
+public class WxRegionController {
 
     @Autowired
     RegionService regionService;
 
     @RequestMapping("list")
-    public BaseRespVo list(){
+    public BaseRespVo list(Region region){
         BaseRespVo<List<Region>> regionBaseRespVo = new BaseRespVo<>();
         regionBaseRespVo.setErrno(0);
         regionBaseRespVo.setErrmsg("成功");
-        List<Region> allRegion = regionService.queryAllRegionAndCategorize();
+        Integer pid = region.getPid();
+        List<Region> allRegion = regionService.queryAllRegionByPid(pid);
         regionBaseRespVo.setData(allRegion);
         return regionBaseRespVo;
     }

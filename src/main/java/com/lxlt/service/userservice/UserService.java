@@ -1,6 +1,7 @@
 package com.lxlt.service.userservice;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @PackgeName: com.lxlt.service
@@ -14,4 +15,6 @@ import java.util.HashMap;
 public interface UserService {
 
     HashMap<String, Object> queryAllUsers();
+
+    List<String> queryAllOrders();
 }

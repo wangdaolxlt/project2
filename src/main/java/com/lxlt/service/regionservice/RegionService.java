@@ -16,4 +16,6 @@ public interface RegionService {
      * @return
      */
     List<Region> queryAllRegionAndCategorize();
+
+    List<Region> queryAllRegionByPid(Integer pid);
 }
