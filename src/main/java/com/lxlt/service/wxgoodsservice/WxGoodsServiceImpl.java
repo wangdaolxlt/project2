@@ -107,10 +107,10 @@ public class WxGoodsServiceImpl implements WxGoodsService {
     public Map<String, Object> list(WxGoodsListQueryBean wxGoodsListQueryBean) {
         Integer page = wxGoodsListQueryBean.getPage();
         Integer size = wxGoodsListQueryBean.getSize();
-        PageHelper.startPage(page, size);
+        // PageHelper.startPage(page, size);
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria().andDeletedEqualTo(false);
-        if (wxGoodsListQueryBean.getCategoryId() != null){
+        if (wxGoodsListQueryBean.getKeyword() == null && wxGoodsListQueryBean.getCategoryId() != null){
             criteria.andCategoryIdEqualTo(wxGoodsListQueryBean.getCategoryId());
         }
         if(wxGoodsListQueryBean.getBrandId() != null){

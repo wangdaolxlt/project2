@@ -80,6 +80,8 @@ public class WxGoodsController {
             baseRespVo.setErrno(500);
             return baseRespVo;
         }
+        // 访问商品成功, 浏览记录进行添加
+
 
         baseRespVo.setData(dataMap);
         baseRespVo.setErrno(0);
