@@ -110,7 +110,13 @@ public class WxGoodsServiceImpl implements WxGoodsService {
         // PageHelper.startPage(page, size);
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria().andDeletedEqualTo(false);
-        if (wxGoodsListQueryBean.getKeyword() == null && wxGoodsListQueryBean.getCategoryId() != null){
+        if(wxGoodsListQueryBean.getIsHot() != null){
+            criteria.andIsHotEqualTo(true);
+        }
+        if(wxGoodsListQueryBean.getIsNew() != null){
+            criteria.andIsNewEqualTo(true);
+        }
+        if (wxGoodsListQueryBean.getCategoryId() != null && wxGoodsListQueryBean.getCategoryId() != 0){
             criteria.andCategoryIdEqualTo(wxGoodsListQueryBean.getCategoryId());
         }
         if(wxGoodsListQueryBean.getBrandId() != null){

@@ -11,6 +11,8 @@ import lombok.Data;
  */
 @Data
 public class WxGoodsListQueryBean extends BaseQueryBean {
+    Boolean isHot;
+    Boolean isNew;
     Integer categoryId;
     Integer brandId;
     String keyword;
