@@ -261,16 +261,4 @@ public class GoodsServiceImpl implements GoodsService {
         return 200;
     }
 
-    /**
-     * 查询goods的数量
-     *
-     * @return
-     */
-    @Override
-    public Long goodsCount() {
-        GoodsExample goodsExample = new GoodsExample();
-        goodsExample.createCriteria().andIdIsNotNull();
-        long l = goodsMapper.countByExample(goodsExample);
-        return l;
-    }
 }
