@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.lxlt.bean.brandbean.Brand">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="`desc`" jdbcType="VARCHAR" property="desc" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
     <result column="sort_order" jdbcType="TINYINT" property="sortOrder" />
     <result column="floor_price" jdbcType="DECIMAL" property="floorPrice" />

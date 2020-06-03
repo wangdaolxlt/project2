@@ -1,0 +1,18 @@
+package com.lxlt.bean.wxgoodsbean;
+
+import com.lxlt.bean.BaseQueryBean;
+import lombok.Data;
+
+/**
+ * @Author: Lucas_Alison
+ * Date: 2020/6/3 14:42
+ *
+ * 前台用于查询goods的bean
+ */
+@Data
+public class WxGoodsListBean extends BaseQueryBean {
+    Integer categoryId;
+    Integer brandId;
+    Integer page;
+    Integer size;
+}

@@ -7,6 +7,7 @@ import com.lxlt.bean.brandbean.Brand;
 import com.lxlt.bean.issuebean.Issue;
 import com.lxlt.bean.issuebean.IssueExample;
 import com.lxlt.bean.wxgoodsbean.WxGoodsDetailBean;
+import com.lxlt.bean.wxgoodsbean.WxGoodsListBean;
 import com.lxlt.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,18 +100,21 @@ public class WxGoodsServiceImpl implements WxGoodsService {
     }
 
     /**
-     * 查询当前分类的商品
-     *
-     * @param categoryId 当前分类
-     * @param page       当前页数
-     * @param size       每页数据显示内容
+     * 查询当前分类或当前品牌的商品
      * @return
      */
     @Override
-    public Map<String, Object> list(Integer categoryId, Integer page, Integer size) {
+    public Map<String, Object> list(WxGoodsListBean wxGoodsListBean) {
+        Integer page = wxGoodsListBean.getPage();
+        Integer size = wxGoodsListBean.getSize();
         PageHelper.startPage(page, size);
         GoodsExample goodsExample = new GoodsExample();
-        goodsExample.createCriteria().andDeletedEqualTo(false).andCategoryIdEqualTo(categoryId);
+        GoodsExample.Criteria criteria = goodsExample.createCriteria().andDeletedEqualTo(false);
+        if (wxGoodsListBean.getCategoryId() != null){
+            criteria.andCategoryIdEqualTo(wxGoodsListBean.getCategoryId());
+        } else {
+            criteria.andBrandIdEqualTo(wxGoodsListBean.getBrandId());
+        }
         List<Goods> goodsList = goodsMapper.selectByExample(goodsExample);
         PageInfo<Goods> goodsPageInfo = new PageInfo<>(goodsList);
         long count = goodsPageInfo.getTotal();
