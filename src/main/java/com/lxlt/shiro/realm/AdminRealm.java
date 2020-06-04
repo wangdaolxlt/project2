@@ -88,8 +88,6 @@ public class AdminRealm extends AuthorizingRealm {
             roleExample.createCriteria().andDeletedEqualTo(false).andIdIn(roleIds);
             roles = roleMapper.selectByExample(roleExample);
         }
-
-
         List<String> permissionList = new ArrayList<>();
         if (roles == null || roles.size() == 0){
             return permissionList;
@@ -109,7 +107,6 @@ public class AdminRealm extends AuthorizingRealm {
             }
         }
         return permissionList;
-
     }
 
 }
