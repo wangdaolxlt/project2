@@ -4,6 +4,8 @@ import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Category;
 import com.lxlt.bean.CategoryListData;
 import com.lxlt.service.categoryservice.CategoryService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,7 @@ public class CategoryController {
         return baseRespVo;
     }
 
+    @RequiresPermissions(value = {"admin:category:delete"})
     @RequestMapping("delete")
     public BaseRespVo delete(@RequestBody CategoryListData categoryListData){
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();

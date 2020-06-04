@@ -1,11 +1,17 @@
 package com.lxlt.service.couponservice;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.util.StringUtil;
 import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.CouponExample;
 import com.lxlt.bean.couponbean.CouponReq;
 import com.lxlt.bean.couponbean.CouponUser;
+
 import com.lxlt.mapper.CartMapper;
+
+import com.lxlt.bean.couponbean.QueryCouponBean;
+
 import com.lxlt.mapper.CouponMapper;
 import com.lxlt.mapper.CouponUserMapper;
 import org.apache.shiro.crypto.hash.Hash;
@@ -39,12 +45,23 @@ public class CouponServiceImpl implements CouponService {
     CartMapper cartMapper;
 
     @Override
-    public HashMap<String, Object> queryAllCoupons() {
+    public HashMap<String, Object> queryCoupons(QueryCouponBean queryCouponBean) {
         CouponExample couponExample = new CouponExample();
-        couponExample.createCriteria().andIdGreaterThan(0);
+        CouponExample.Criteria criteria = couponExample.createCriteria().andDeletedEqualTo(false);
 
-        int couponsNum = (int) couponMapper.countByExample(couponExample);
+        PageHelper.startPage(queryCouponBean.getPage(), queryCouponBean.getLimit());
+        if(StringUtil.isNotEmpty(queryCouponBean.getName())){
+            criteria.andNameLike("%" + queryCouponBean.getName() + "%");
+        }
+        if(queryCouponBean.getType() != null){
+            criteria.andTypeEqualTo(queryCouponBean.getType());
+        }
+        if(queryCouponBean.getStatus() != null){
+            criteria.andStatusEqualTo(queryCouponBean.getStatus());
+        }
         List<Coupon> couponList = couponMapper.selectByExample(couponExample);
+        PageInfo<Coupon> couponPageInfo = new PageInfo<>(couponList);
+        long couponsNum = couponPageInfo.getTotal();
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("items", couponList);
@@ -93,6 +110,7 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public HashMap<String, Object> listuserCoupon() {
         HashMap<String, Object> hashMap = new HashMap<>();
+        // TODO: 2020/6/4
         hashMap.put("items", "");
         hashMap.put("total", 0);
         return hashMap;
@@ -138,7 +156,9 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
+
     public int insertWxCoupon(CouponUser couponUser) {
+
         //couponUser.getId();
         //System.out.println(id);
         return couponUserMapper.insertSelective(couponUser);
@@ -146,6 +166,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public void exchangeCouponByCode(String code) {
+
         Coupon coupon = couponMapper.selectByCode(code);
         //couponUserMapper.insertSelective(coupon);
         return;
