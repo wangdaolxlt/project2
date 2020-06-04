@@ -2,6 +2,7 @@ package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Result;
+import com.lxlt.bean.SearchHistory;
 import com.lxlt.bean.keywordbean.Keyword;
 import com.lxlt.service.wxsearchservice.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +40,12 @@ public class WxSearchController {
         baseRespVo.setErrmsg("成功");
         //Data里面存放的是匹配到的热门搜索的内容
         baseRespVo.setData(list);
+
+        searchService.insertHistory(keyword);
         return baseRespVo;
     }
 
-    //请求负载为空
+    //请求参数{}
     @RequestMapping("clearhistory")
     public Result clearHistory(){
         Result result = new Result();

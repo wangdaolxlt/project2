@@ -1,5 +1,6 @@
 package com.lxlt.service.wxsearchservice;
 
+import com.lxlt.bean.SearchHistory;
 import com.lxlt.bean.keywordbean.Keyword;
 
 import java.util.List;
@@ -12,5 +13,7 @@ public interface SearchService {
     List<String> searchHelper(String keyword);
 
     Integer clearHistory();
+
+    void insertHistory(String keyword);
 }
 

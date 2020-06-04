@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Handler;
 
 @Service
@@ -33,7 +30,8 @@ public class WxFootprintServiceImpl implements WxFootprintService{
         HashMap<String, Object> map = new HashMap<>();
         List<WxFootprint> footprints = footprintMapper.selectByWxExample();
         PageInfo<WxFootprint> wxFootprintPageInfo = new PageInfo<>(footprints);
-        long total = wxFootprintPageInfo.getSize();
+        long total = wxFootprintPageInfo.getTotal();
+        map.put("totalPages",total/size + 1);
         map.put("footprintList",footprints);
         return map;
     }
@@ -54,6 +52,5 @@ public class WxFootprintServiceImpl implements WxFootprintService{
         footprint.setUpdateTime(footprint.getAddTime());
         footprint.setDeleted(false);
         footprintMapper.insert(footprint);
-
     }
 }

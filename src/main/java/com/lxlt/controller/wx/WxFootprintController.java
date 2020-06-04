@@ -26,7 +26,7 @@ public class WxFootprintController {
         baseRespVo.setData(map);
         return baseRespVo;
     }
-
+    //删除足迹
     @RequestMapping("delete")
     public Result deleteFootprint(Integer id){
         Result result = new Result();

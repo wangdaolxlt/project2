@@ -1,6 +1,9 @@
 package com.lxlt.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
+import java.util.List;
 
 public class Feedback {
     private Integer id;
@@ -19,10 +22,12 @@ public class Feedback {
 
     private Boolean hasPicture;
 
-    private String picUrls;
+    private List<String> picUrls;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
@@ -91,12 +96,12 @@ public class Feedback {
         this.hasPicture = hasPicture;
     }
 
-    public String getPicUrls() {
+    public List<String> getPicUrls() {
         return picUrls;
     }
 
-    public void setPicUrls(String picUrls) {
-        this.picUrls = picUrls == null ? null : picUrls.trim();
+    public void setPicUrls(List<String> picUrls) {
+        this.picUrls = picUrls;
     }
 
     public Date getAddTime() {

@@ -9,6 +9,7 @@ import com.lxlt.mapper.SearchHistoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,20 @@ public class SearchServiceImpl implements SearchService{
         criteria.andKeywordLike("%" + keyword + "%").andIsHotEqualTo(true).andDeletedEqualTo(false);
         List<String> keywords = keywordMapper.selectByKeyword(keywordExample);
         return keywords;
+    }
+
+    //查询之后要添加到历史记录
+    @Override
+    public void insertHistory(String keyword) {
+        SearchHistory searchHistory = new SearchHistory();
+        Integer userId = 1;
+        searchHistory.setKeyword(keyword);
+        searchHistory.setUserId(userId);
+        searchHistory.setAddTime(new Date());
+        searchHistory.setUpdateTime(new Date());
+        searchHistory.setDeleted(false);
+        searchHistory.setFrom("wx");
+        searchHistoryMapper.insert(searchHistory);
     }
 
     @Override
