@@ -1,5 +1,7 @@
 package com.lxlt.service.authservice;
 
+import com.lxlt.bean.Admin;
+
 import java.util.Map;
 
 /**
@@ -17,4 +19,6 @@ public interface AuthService {
     Map getInfo(String username);
 
     void createAdminLogoutLog(String username);
+
+    Admin queryAdminByUsername(String username);
 }

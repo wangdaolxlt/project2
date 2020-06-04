@@ -3,6 +3,7 @@ package com.lxlt.service.couponservice;
 import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.couponbean.CouponReq;
 import com.lxlt.bean.couponbean.CouponUser;
+import com.lxlt.bean.couponbean.QueryCouponBean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public interface CouponService {
 
 
-    HashMap<String, Object> queryAllCoupons();
+    HashMap<String, Object> queryCoupons(QueryCouponBean queryCouponBean);
 
     Coupon addCoupon(Coupon coupon);
 

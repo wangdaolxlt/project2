@@ -32,4 +32,11 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     User selectUserById(@Param("id") Integer id);
+
+    /**
+     * 根据用户名查询密码
+     * @param username 用户名
+     * @return
+     */
+    String getPasswordByUsername(@Param("username") String username);
 }

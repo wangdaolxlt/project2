@@ -188,6 +188,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="getPasswordByUsername" resultType="java.lang.String">
+      select `password` from cskaoyanmall_admin where `username` = #{username};
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_admin
     <set>

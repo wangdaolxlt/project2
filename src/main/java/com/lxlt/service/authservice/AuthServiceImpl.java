@@ -99,7 +99,9 @@ public class AuthServiceImpl implements AuthService{
         logMapper.insertSelective(log);
     }
 
-    private Admin queryAdminByUsername(String username) {
+
+    @Override
+    public Admin queryAdminByUsername(String username) {
         AdminExample adminExample = new AdminExample();
         adminExample.createCriteria().andUsernameEqualTo(username);
         List<Admin> admins = adminMapper.selectByExample(adminExample);

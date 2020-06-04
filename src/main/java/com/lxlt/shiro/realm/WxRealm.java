@@ -1,5 +1,6 @@
 package com.lxlt.shiro.realm;
 
+import com.lxlt.mapper.UserMapper;
 import com.lxlt.shiro.token.MallToken;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -8,6 +9,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,6 +21,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WxRealm extends AuthorizingRealm {
+
+    @Autowired
+    UserMapper userMapper;
 
     /**
      * wx认证
@@ -32,9 +37,9 @@ public class WxRealm extends AuthorizingRealm {
 
         String username = token.getUsername();
         // 获取密码
-        // credential = wxUserService.getPasswordByUsername(username);
+        String password = userMapper.getPasswordByUsername(username);
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, credential, this.getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, this.getName());
         return authenticationInfo;
     }
 

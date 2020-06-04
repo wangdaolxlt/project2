@@ -4,6 +4,7 @@ package com.lxlt.controller.admin;
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.BaseRespVo2;
 import com.lxlt.bean.couponbean.Coupon;
+import com.lxlt.bean.couponbean.QueryCouponBean;
 import com.lxlt.service.couponservice.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,9 +31,9 @@ public class CouponController {
     CouponService couponService;
 
     @RequestMapping("list")
-    public BaseRespVo list() {
+    public BaseRespVo list(QueryCouponBean queryCouponBean) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        HashMap<String, Object> hashMap = couponService.queryAllCoupons();
+        HashMap<String, Object> hashMap = couponService.queryCoupons(queryCouponBean);
         baseRespVo.setData(hashMap);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");
