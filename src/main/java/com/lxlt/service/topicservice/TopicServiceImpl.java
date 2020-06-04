@@ -69,20 +69,16 @@ public class TopicServiceImpl implements TopicService{
     @Transactional(rollbackFor = Exception.class)
     public Topic updateTopic(Topic requestTopic) {
         requestTopic.setUpdateTime(new Date());
-        TopicExample topicExample = new TopicExample();
-        topicExample.createCriteria().andIdEqualTo(requestTopic.getId());
-        topicMapper.updateByExampleSelective(requestTopic, topicExample);
+        topicMapper.updateByPrimaryKeySelective(requestTopic);
         return requestTopic;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int deleteById(Topic topic) {
-        TopicExample topicExample = new TopicExample();
-        topicExample.createCriteria().andIdEqualTo(topic.getId());
         topic.setUpdateTime(new Date());
         topic.setDeleted(true);
-        int topicCode = topicMapper.updateByExampleSelective(topic, topicExample);
+        int topicCode = topicMapper.updateByPrimaryKeySelective(topic);
         if(topicCode == 0){
             return 500;
         }

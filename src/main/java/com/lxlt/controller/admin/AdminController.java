@@ -5,6 +5,7 @@ import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.adminbean.AdminReq;
 import com.lxlt.bean.adminbean.AdminRespVo;
 import com.lxlt.service.adminservice.AdminService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class AdminController {
     AdminService adminService;
 
     //分页查询
+    @RequiresPermissions(value = {"admin:admin:list"})
     @RequestMapping("list")
     public AdminRespVo listAdmin(AdminReq adminReq){
         AdminRespVo<Map<String,Object>> adminRespVo = new AdminRespVo();

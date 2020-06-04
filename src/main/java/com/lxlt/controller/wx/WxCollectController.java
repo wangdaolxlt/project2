@@ -4,6 +4,8 @@ import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.Collect;
 import com.lxlt.bean.wxcollectbean.WxCollectReqVo;
 import com.lxlt.service.wxcollectservice.WxCollectService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,10 @@ public class WxCollectController {
     @RequestMapping("list")
     public BaseRespVo collectList(WxCollectReqVo wxCollectReqVo){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCollectService.collectList(username, wxCollectReqVo);
         if(map == null){
             baseRespVo.setErrno(502);
@@ -44,8 +48,10 @@ public class WxCollectController {
     @RequestMapping("addordelete")
     public BaseRespVo collectAddOrDelete(@RequestBody Collect collect){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCollectService.collectAddOrDelete(username, collect);
         baseRespVo.setData(map);
         baseRespVo.setErrno(0);

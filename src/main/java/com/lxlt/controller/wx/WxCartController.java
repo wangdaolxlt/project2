@@ -7,6 +7,8 @@ import com.lxlt.bean.cartbean.CartCheckoutReqVo;
 import com.lxlt.bean.cartbean.CartCheckoutRespVo;
 import com.lxlt.service.wxcartservice.WxCartService;
 import com.lxlt.service.wxcatalogservice.WxCatalogService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +37,10 @@ public class WxCartController {
     @RequestMapping("index")
     public BaseRespVo cartIndex(){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCartService.cartIndex(username);
         if(map == null){
             baseRespVo.setErrno(502);
@@ -56,7 +60,9 @@ public class WxCartController {
     @RequestMapping("goodscount")
     public BaseRespVo cartGoodsCount(){
         BaseRespVo baseRespVo = new BaseRespVo();
-        String username = "test1";
+        /*String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         int count = wxCartService.cartGoodsCount(username);
         baseRespVo.setData(count);
         baseRespVo.setErrno(0);
@@ -72,8 +78,10 @@ public class WxCartController {
     @RequestMapping("checked")
     public BaseRespVo cartChecked(@RequestBody CartCheckedReqVo cartCheckedReqVo){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCartService.cartChecked(username, cartCheckedReqVo);
         if(map == null){
             baseRespVo.setErrno(502);
@@ -125,8 +133,10 @@ public class WxCartController {
     @RequestMapping("delete")
     public BaseRespVo cartDelete(@RequestBody CartCheckedReqVo cartCheckedReqVo){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCartService.cartDelete(username, cartCheckedReqVo);
         if(map == null){
             baseRespVo.setErrno(502);
@@ -147,8 +157,10 @@ public class WxCartController {
     @RequestMapping("add")
     public BaseRespVo cartAdd(@RequestBody Cart cart){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCartService.cartAdd(username, cart);
         int code = (int) map.get("errno");
         if(code == 502){
@@ -181,8 +193,10 @@ public class WxCartController {
     @RequestMapping("fastadd")
     public BaseRespVo cartFastAdd(@RequestBody Cart cart){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         Map map = wxCartService.cartFastAdd(username, cart);
         int code = (int) map.get("errno");
         if(code == 502){
@@ -210,8 +224,10 @@ public class WxCartController {
     @RequestMapping("checkout")
     public BaseRespVo checkout(CartCheckoutReqVo cartCheckoutReqVo){
         BaseRespVo baseRespVo = new BaseRespVo();
-        //预设一个username
-        String username = "test1";
+/*        //预设一个username
+        String username = "test1";*/
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         CartCheckoutRespVo cartCheckoutRespVo = wxCartService.checkout(username, cartCheckoutReqVo);
         baseRespVo.setData(cartCheckoutRespVo);
         baseRespVo.setErrno(0);

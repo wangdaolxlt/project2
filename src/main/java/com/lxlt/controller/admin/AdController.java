@@ -4,6 +4,7 @@ import com.lxlt.bean.Ad;
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.bean.BaseRespVo2;
 import com.lxlt.service.adservice.AdService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class AdController {
     @Autowired
     AdService adService;
 
+    @RequiresPermissions("admin:ad:list")
     @RequestMapping("list")
     public BaseRespVo list() {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
@@ -38,6 +40,7 @@ public class AdController {
         return baseRespVo;
     }
 
+    @RequiresPermissions("admin:ad:create")
     @RequestMapping("create")
     public BaseRespVo create(@RequestBody Ad ad) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
@@ -48,6 +51,7 @@ public class AdController {
         return baseRespVo;
     }
 
+    @RequiresPermissions("admin:ad:update")
     @RequestMapping("update")
     public BaseRespVo update(@RequestBody Ad ad) {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
@@ -58,6 +62,7 @@ public class AdController {
         return baseRespVo;
     }
 
+    @RequiresPermissions("admin:ad:delete")
     @RequestMapping("delete")
     public BaseRespVo2 delete(@RequestBody Ad ad) {
         BaseRespVo2 baseRespVo2 = new BaseRespVo2();

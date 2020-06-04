@@ -78,15 +78,26 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public Map getInfo(String username) {
         HashMap<String, Object> map = new HashMap<>();
+        List<Role> roles = null;
+        List<String> permissionList = new ArrayList<>();
         Admin admin = queryAdminByUsername(username);
         List roleIds = admin.getRoleIds();
-        List<Role> roles = null;
+        if(roleIds.contains(1)){
+            ArrayList arrayList = new ArrayList();
+            arrayList.add("超级管理员");
+            permissionList.add("*");
+            map.put("roles",arrayList);
+            map.put("name",username);
+            map.put("perms",permissionList);
+            map.put("avatar",admin.getAvatar());
+            return map;
+        }
+
         if(roleIds != null && roleIds.size() != 0){
             RoleExample roleExample = new RoleExample();
             roleExample.createCriteria().andIdIn(roleIds);
             roles = roleMapper.selectByExample(roleExample);
         }
-        List<String> permissionList = new ArrayList<>();
         if (roles == null || roles.size() == 0){
             map.put("roles",roles);
             map.put("name",username);

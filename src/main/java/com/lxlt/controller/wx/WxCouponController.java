@@ -89,7 +89,7 @@ public class WxCouponController {
             baseRespVo.setErrno(740);
             baseRespVo.setErrmsg("优惠券已过期");
         }else{
-            couponUser.setUserId(1);
+            couponUser.setUserId(4);
             coupon.setTotal(coupon.getTotal() - 1);
             couponService.updateCoupon(coupon);
             couponService.insertWxCoupon(couponUser);

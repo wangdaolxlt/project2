@@ -21,13 +21,13 @@ public class WxFeedbackServiceImpl implements WxFeedbackService {
     StorageMapper storageMapper;
     @Override
     public Integer insertFeedback(Feedback feedback) {
-        Integer i = null;
+        Integer i = 0;
         feedback.setDeleted(false);
         feedback.setAddTime(new Date());
         feedback.setUpdateTime(new Date());
         //这里的用户名和id都是写死的
-        feedback.setUserId(1);
-        feedback.setUsername("test1");
+        feedback.setUserId(4);
+        feedback.setUsername("user1");
         feedback.setPicUrls(feedback.getPicUrls());
         //通过正则验证就进行插入
         if(checkCellphone(feedback.getMobile())) {

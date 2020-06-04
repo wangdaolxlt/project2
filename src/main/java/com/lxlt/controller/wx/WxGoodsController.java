@@ -86,7 +86,7 @@ public class WxGoodsController {
             return baseRespVo;
         }
         // 访问商品成功, 浏览记录进行添加
-        int userId = 1;
+        int userId = 4;
         wxFootprintService.insertFootPrint(userId, id);
 
 

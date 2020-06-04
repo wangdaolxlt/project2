@@ -107,7 +107,7 @@
     select
       DATE_FORMAT(add_time,'%Y-%m-%d') as `day`,
       count(id) as users
-    from cskaoyanmall_role
+    from cskaoyanmall_user
     GROUP BY `day`
   </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
