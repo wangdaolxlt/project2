@@ -4,6 +4,7 @@ import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.couponbean.CouponReq;
 import com.lxlt.bean.couponbean.CouponUser;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,9 +35,15 @@ public interface CouponService {
 
     HashMap<String, Object> queryWxAllMyCoupons(CouponReq couponReq);
 
-    HashMap<String, Object> queryWxselectCoupons(CouponReq couponReq);
+    HashMap<String, Object> queryWxSelectCoupons(CouponReq couponReq);
 
-    Boolean insertWxCoupon(CouponUser couponUser);
+    int insertWxCoupon(CouponUser couponUser);
 
     void exchangeCouponByCode(String code);
+
+    Coupon queryCouponById(Integer couponId);
+
+    BigDecimal queryWxGoodsPriceById(Integer cartId);
+
+    List<Coupon> queryWxEnableCouponList(BigDecimal price);
 }

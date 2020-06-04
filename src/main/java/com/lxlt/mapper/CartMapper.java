@@ -4,6 +4,7 @@ import com.lxlt.bean.Cart;
 import com.lxlt.bean.CartExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface CartMapper {
@@ -28,4 +29,6 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKey(Cart record);
+
+    BigDecimal selectGoodsPriceById(Integer cartId);
 }

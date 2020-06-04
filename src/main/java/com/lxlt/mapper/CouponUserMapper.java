@@ -1,9 +1,11 @@
 package com.lxlt.mapper;
 
+import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.couponbean.CouponUser;
 import com.lxlt.bean.CouponUserExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface CouponUserMapper {
@@ -28,4 +30,6 @@ public interface CouponUserMapper {
     int updateByPrimaryKeySelective(CouponUser record);
 
     int updateByPrimaryKey(CouponUser record);
+
+    List<Coupon> selectEnableCouponList(BigDecimal price);
 }

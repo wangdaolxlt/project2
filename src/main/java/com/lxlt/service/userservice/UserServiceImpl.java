@@ -26,8 +26,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    @Autowired
-    OrderMapper orderMapper;
 
     @Override
     public HashMap<String, Object> queryAllUsers() {
@@ -43,10 +41,4 @@ public class UserServiceImpl implements UserService {
         return hashMap;
     }
 
-    @Override
-    public List<String> queryAllOrders() {
-        OrderExample orderExample = new OrderExample();
-        //orderExample.createCriteria()
-        return null;
-    }
 }

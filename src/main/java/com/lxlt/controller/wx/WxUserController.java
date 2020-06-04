@@ -2,12 +2,14 @@ package com.lxlt.controller.wx;
 
 import com.lxlt.bean.BaseRespVo;
 import com.lxlt.service.userservice.UserService;
+import com.lxlt.service.wxuserservice.WxUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @PackgeName: com.lxlt.controller
@@ -19,16 +21,16 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("admin/user")
+@RequestMapping("wx/user")
 public class WxUserController {
 
     @Autowired
-    UserService userService;
+    WxUserService wxUserService;
 
     @RequestMapping("index")
     public BaseRespVo list() {
         BaseRespVo<Object> baseRespVo = new BaseRespVo<>();
-        List<String> orders = userService.queryAllOrders();
+        HashMap<String, Object> orders = wxUserService.queryAllOrders();
         baseRespVo.setData(orders);
         baseRespVo.setErrno(0);
         baseRespVo.setErrmsg("成功");

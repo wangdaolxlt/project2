@@ -218,7 +218,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectGoodsPriceById" resultType="java.math.BigDecimal">
+      select price from cskaoyanmall_cart where id = #{cartId}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_cart
     <set>
       <if test="record.id != null">

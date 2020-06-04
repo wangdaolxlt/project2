@@ -5,12 +5,14 @@ import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.bean.CouponExample;
 import com.lxlt.bean.couponbean.CouponReq;
 import com.lxlt.bean.couponbean.CouponUser;
+import com.lxlt.mapper.CartMapper;
 import com.lxlt.mapper.CouponMapper;
 import com.lxlt.mapper.CouponUserMapper;
 import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,9 @@ public class CouponServiceImpl implements CouponService {
 
     @Autowired
     CouponUserMapper couponUserMapper;
+
+    @Autowired
+    CartMapper cartMapper;
 
     @Override
     public HashMap<String, Object> queryAllCoupons() {
@@ -120,7 +125,7 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
-    public HashMap<String, Object> queryWxselectCoupons(CouponReq couponReq) {
+    public HashMap<String, Object> queryWxSelectCoupons(CouponReq couponReq) {
         PageHelper.startPage(couponReq.getPage(), couponReq.getSize());
         HashMap<String, Object> hashMap = new HashMap<>();
         CouponExample couponExample = new CouponExample();
@@ -133,11 +138,10 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
-    public Boolean insertWxCoupon(CouponUser couponUser) {
-        //int id = couponUserMapper.insertSelective(couponUser);
+    public int insertWxCoupon(CouponUser couponUser) {
         //couponUser.getId();
         //System.out.println(id);
-        return null;
+        return couponUserMapper.insertSelective(couponUser);
     }
 
     @Override
@@ -145,5 +149,20 @@ public class CouponServiceImpl implements CouponService {
         Coupon coupon = couponMapper.selectByCode(code);
         //couponUserMapper.insertSelective(coupon);
         return;
+    }
+
+    @Override
+    public Coupon queryCouponById(Integer couponId) {
+        return couponMapper.selectByPrimaryKey(couponId);
+    }
+
+    @Override
+    public BigDecimal queryWxGoodsPriceById(Integer cartId) {
+        return cartMapper.selectGoodsPriceById(cartId);
+    }
+
+    @Override
+    public List<Coupon> queryWxEnableCouponList(BigDecimal price) {
+        return couponUserMapper.selectEnableCouponList(price);
     }
 }

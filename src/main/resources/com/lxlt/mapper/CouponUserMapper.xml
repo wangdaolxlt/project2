@@ -195,7 +195,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="selectEnableCouponList" resultType="com.lxlt.bean.couponbean.Coupon">
+select b.id,b.name,b.`desc`,b.tag,b.min,b.discount,
+             a.add_time as addTime,a.end_time as endTime from
+      cskaoyanmall_coupon_user a left join cskaoyanmall_coupon b on a.coupon_id = b.id where #{price} > b.min and a.status = 0
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update cskaoyanmall_coupon_user
     <set>
       <if test="record.id != null">

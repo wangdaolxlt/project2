@@ -16,5 +16,4 @@ public interface UserService {
 
     HashMap<String, Object> queryAllUsers();
 
-    List<String> queryAllOrders();
 }

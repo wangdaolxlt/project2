@@ -6,6 +6,7 @@ import com.lxlt.bean.cartbean.CartCheckedReqVo;
 import com.lxlt.bean.cartbean.CartCheckoutReqVo;
 import com.lxlt.bean.cartbean.CartCheckoutRespVo;
 import com.lxlt.bean.cartbean.CartTotal;
+import com.lxlt.bean.couponbean.Coupon;
 import com.lxlt.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

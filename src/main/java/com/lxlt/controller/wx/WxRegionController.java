@@ -64,5 +64,5 @@ public class WxRegionController {
         baseRespVo.setErrmsg("成功");
         return baseRespVo;
     }
-    
+
 }
