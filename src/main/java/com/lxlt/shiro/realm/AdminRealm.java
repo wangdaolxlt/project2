@@ -1,11 +1,10 @@
 package com.lxlt.shiro.realm;
 
-import com.lxlt.bean.Admin;
-import com.lxlt.bean.AdminExample;
-import com.lxlt.bean.Permission;
-import com.lxlt.bean.PermissionExample;
+import com.lxlt.bean.*;
 import com.lxlt.mapper.AdminMapper;
+import com.lxlt.mapper.AllPermissionsMapper;
 import com.lxlt.mapper.PermissionMapper;
+import com.lxlt.mapper.RoleMapper;
 import com.lxlt.service.authservice.AuthService;
 import com.lxlt.shiro.token.MallToken;
 import org.apache.shiro.authc.AuthenticationException;
@@ -16,6 +15,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +36,9 @@ public class AdminRealm extends AuthorizingRealm {
     AdminMapper adminMapper;
 
     @Autowired
-    PermissionMapper permissionMapper;
+    AllPermissionsMapper allPermissionsMapper;
+    @Autowired
+    RoleMapper roleMapper;
 
     /**
      * Admin认证
@@ -79,19 +81,32 @@ public class AdminRealm extends AuthorizingRealm {
         List<Admin> admins = adminMapper.selectByExample(adminExample);
         Admin admin = admins.get(0);
         List<Integer> roleIds = admin.getRoleIds();
-        List<Permission> permissions = null;
+
+        List<Role> roles = null;
         if(roleIds != null && roleIds.size() != 0){
-            PermissionExample permissionExample = new PermissionExample();
-            permissionExample.createCriteria().andDeletedEqualTo(false).andRoleIdIn(roleIds);
-            permissions = permissionMapper.selectByExample(permissionExample);
+            RoleExample roleExample = new RoleExample();
+            roleExample.createCriteria().andDeletedEqualTo(false).andIdIn(roleIds);
+            roles = roleMapper.selectByExample(roleExample);
         }
 
+
         List<String> permissionList = new ArrayList<>();
-        if (permissions == null || permissions.size() == 0){
+        if (roles == null || roles.size() == 0){
             return permissionList;
         }
-        for (Permission permission : permissions) {
-            permissionList.add(permission.getPermission());
+        for (Role role : roles) {
+            List<Integer> permissions = role.getPermissions();
+            List<AllPermissions> allPermissions = new ArrayList<>();
+            if(permissions != null && permissions.size() != 0){
+                AllPermissionsExample allPermissionsExample = new AllPermissionsExample();
+                allPermissionsExample.createCriteria().andPrimaryIdIn(permissions);
+                allPermissions = allPermissionsMapper.selectByExample(allPermissionsExample);
+            }
+            if (allPermissions.size() != 0){
+                for (AllPermissions allPermission : allPermissions) {
+                    permissionList.add(allPermission.getId());
+                }
+            }
         }
         return permissionList;
 
