@@ -77,6 +77,7 @@ public class AuthServiceImpl implements AuthService{
      */
     @Override
     public Map getInfo(String username) {
+        HashMap<String, Object> map = new HashMap<>();
         Admin admin = queryAdminByUsername(username);
         List roleIds = admin.getRoleIds();
         List<Role> roles = null;
@@ -85,11 +86,31 @@ public class AuthServiceImpl implements AuthService{
             roleExample.createCriteria().andIdIn(roleIds);
             roles = roleMapper.selectByExample(roleExample);
         }
-        List<String> perms = adminRealm.getPermByUsername(username);
-        HashMap<String, Object> map = new HashMap<>();
+        List<String> permissionList = new ArrayList<>();
+        if (roles == null || roles.size() == 0){
+            map.put("roles",roles);
+            map.put("name",username);
+            map.put("perms",permissionList);
+            map.put("avatar",admin.getAvatar());
+            return map;
+        }
+        for (Role role : roles) {
+            List<Integer> permissions = role.getPermissions();
+            List<AllPermissions> allPermissions = new ArrayList<>();
+            if(permissions != null && permissions.size() != 0){
+                AllPermissionsExample allPermissionsExample = new AllPermissionsExample();
+                allPermissionsExample.createCriteria().andPrimaryIdIn(permissions);
+                allPermissions = allPermissionsMapper.selectByExample(allPermissionsExample);
+            }
+            if (allPermissions.size() != 0){
+                for (AllPermissions allPermission : allPermissions) {
+                    permissionList.add(allPermission.getApi());
+                }
+            }
+        }
         map.put("roles",roles);
         map.put("name",username);
-        map.put("perms",perms);
+        map.put("perms",permissionList);
         map.put("avatar",admin.getAvatar());
         return map;
     }

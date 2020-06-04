@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
+
 /**
  * @PackgeName: com.lxlt.controller.wx
  * @ClassName: WxStorageController
@@ -35,7 +37,9 @@ public class WxStorageController {
         }
         respVo.setErrno(0);
         respVo.setErrmsg("成功");
-        respVo.setData(storage.getUrl());
+        HashMap map = new HashMap();
+        map.put("url", storage.getUrl());
+        respVo.setData(map);
         return respVo;
     }
 }
