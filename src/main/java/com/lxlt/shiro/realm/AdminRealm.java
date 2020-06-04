@@ -75,7 +75,7 @@ public class AdminRealm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
-    private List<String> getPermByUsername(String username) {
+    public List<String> getPermByUsername(String username) {
         AdminExample adminExample = new AdminExample();
         adminExample.createCriteria().andDeletedEqualTo(false).andUsernameEqualTo(username);
         List<Admin> admins = adminMapper.selectByExample(adminExample);

@@ -1,12 +1,12 @@
 package com.lxlt.service.authservice;
 
-import com.lxlt.bean.Admin;
-import com.lxlt.bean.AdminExample;
-import com.lxlt.bean.RoleExample;
+import com.lxlt.bean.*;
 import com.lxlt.bean.logbean.Log;
 import com.lxlt.mapper.AdminMapper;
+import com.lxlt.mapper.AllPermissionsMapper;
 import com.lxlt.mapper.LogMapper;
 import com.lxlt.mapper.RoleMapper;
+import com.lxlt.shiro.realm.AdminRealm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,8 @@ public class AuthServiceImpl implements AuthService{
     RoleMapper roleMapper;
     @Autowired
     AdminMapper adminMapper;
+    @Autowired
+    AllPermissionsMapper allPermissionsMapper;
 
     @Override
     public void createFailAdminLog(String username) {
@@ -65,6 +67,9 @@ public class AuthServiceImpl implements AuthService{
         logMapper.insertSelective(log);
     }
 
+
+    @Autowired
+    AdminRealm  adminRealm;
     /**
      * 获取信息
      * @param username
@@ -73,11 +78,18 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public Map getInfo(String username) {
         Admin admin = queryAdminByUsername(username);
-
+        List roleIds = admin.getRoleIds();
+        List<Role> roles = null;
+        if(roleIds != null && roleIds.size() != 0){
+            RoleExample roleExample = new RoleExample();
+            roleExample.createCriteria().andIdIn(roleIds);
+            roles = roleMapper.selectByExample(roleExample);
+        }
+        List<String> perms = adminRealm.getPermByUsername(username);
         HashMap<String, Object> map = new HashMap<>();
-        map.put("roles","");
+        map.put("roles",roles);
         map.put("name",username);
-        map.put("perms","");
+        map.put("perms",perms);
         map.put("avatar",admin.getAvatar());
         return map;
     }
